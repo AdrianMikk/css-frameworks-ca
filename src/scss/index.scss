@@ -1,4 +1,4 @@
-@import "./variables";
+@import "variables";
 @import "./header";
 @import "./login";
 @import "./feed";
@@ -10,13 +10,13 @@ $medium-screen: 769px;
 $large-screen: 1024px;
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Lobster', cursive;
     font-family: 'Poppins', sans-serif;
 }
 
 h1 {
     font-family: 'Lobster';
+}
+
+.customNavBg {
+    background-color: yellow;
 }

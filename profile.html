@@ -17,7 +17,7 @@
 <body>
     <header>
         <div class="bs-component">
-            <nav class="navbar navbar-expand-lg bg-primary d-flex">
+            <nav class="navbar navbar-expand-lg customNavBg d-flex">
                 <a class="navbar-brand logo fs-2" href="/index.html">
                     ConnectVerse
                 </a>
@@ -39,7 +39,8 @@
                         </li>
                     </ul>
                     <form class="form d-flex justify-content-between my-lg-0">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search">
+                        <label for="search" class="visually-hidden">Search</label>
+                        <input id="search" class="form-control mr-sm-2" type="search" placeholder="Search">
                         <button class="btn btn-light m-2 my-sm-0" type="submit">
                             Search
                         </button>
@@ -54,11 +55,11 @@
             <h1 class="mt-5 pt-2">ConnectVerse</h1>
             <div class="container">
                 <div class="d-flex p-4 justify-content-center">
-                    <img src="/images/elmo.jpg" alt="">
+                    <img src="/images/elmo.jpg" alt="Picture of Elmo sitting on a rock">
                 </div>
                 <div class="d-flex justify-content-center p-4">
                     <div>
-                        <h2 class="my-sm-2">Elmo Elmosen</h2>
+                        <h2>Elmo Elmosen</h2>
                     </div>
                     <div class="d-flex flex-column">
                         <button class="btn btn-primary mx-5">Follow</button>
@@ -121,12 +122,13 @@
                     </p>
                 </div>
             </div> -->
-            <div class="container">
+            <div class="container mb-5">
                 <div class="row">
                     <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                         <div class="card mb-4">
                             <h3 class="card-header">Mojito</h3>
-                            <img src="/images/johanne-pold-jacobsen-ohoOQxgvB0w-unsplash (1).jpg" alt="Image 1"
+                            <img src="/images/johanne-pold-jacobsen-ohoOQxgvB0w-unsplash (1).jpg"
+                                alt="Refreshing mojito cocktail with lime, mint leaves, and ice in a glass."
                                 class="card-img-top">
                             <div class="card-body">
                                 <p class="card-text">5 mint leaves, 2 ounces white rum 1 ounce fresh lime juice ½ ounce
@@ -137,8 +139,8 @@
                     <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                         <div class="card mb-4">
                             <h3 class="card-header">Whiskey Sour</h3>
-                            <img src="/images/andrey-grodz-gNDXG7EEjXM-unsplash (1).jpg" alt="Image 2"
-                                class="card-img-top">
+                            <img src="/images/andrey-grodz-gNDXG7EEjXM-unsplash (1).jpg"
+                                alt="Classic whiskey sour cocktail garnished with a lemon peel." class="card-img-top">
                             <div class="card-body">
                                 <p class="card-text">2 ounces bourbon 3/4 ounce lemon juice, freshly squeezed 1/2 ounce
                                     simple syrup 1/2 ounce egg white</p>
@@ -148,7 +150,8 @@
                     <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                         <div class="card mb-4">
                             <h3 class="card-header">Martini</h3>
-                            <img src="/images/stanislav-ivanitskiy-VIYPN3KykEU-unsplash.jpg" alt="Image 3"
+                            <img src="/images/stanislav-ivanitskiy-VIYPN3KykEU-unsplash.jpg"
+                                alt="Elegant martini cocktail with a perfect mix of gin or vodka, vermouth, and olive garnish."
                                 class="card-img-top">
                             <div class="card-body">
                                 <p class="card-text">60ml gin or vodka
@@ -160,7 +163,8 @@
                     <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                         <div class="card mb-4">
                             <h3 class="card-header">Old Fashioned</h3>
-                            <img src="/images/jessica-kantak-bailey-woLpKjQisW8-unsplash (1).jpg" alt="Image 4"
+                            <img src="/images/jessica-kantak-bailey-woLpKjQisW8-unsplash (1).jpg"
+                                alt="Timeless Old Fashioned cocktail with bourbon, sugar, bitters, and an orange twist garnish."
                                 class="card-img-top">
                             <div class="card-body">
                                 <p class="card-text">1 teaspoon sugar 3 dashes Angostura bitters 1 teaspoon water 2
@@ -171,7 +175,8 @@
                     <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                         <div class="card mb-4">
                             <h3 class="card-header">Mojito</h3>
-                            <img src="/images/johanne-pold-jacobsen-ohoOQxgvB0w-unsplash (1).jpg" alt="Image 1"
+                            <img src="/images/johanne-pold-jacobsen-ohoOQxgvB0w-unsplash (1).jpg"
+                                alt="Refreshing mojito cocktail with lime, mint leaves, and ice in a glass."
                                 class="card-img-top">
                             <div class="card-body">
                                 <p class="card-text">5 mint leaves, 2 ounces white rum 1 ounce fresh lime juice ½ ounce
@@ -182,8 +187,8 @@
                     <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                         <div class="card mb-4">
                             <h3 class="card-header">Whiskey Sour</h3>
-                            <img src="/images/andrey-grodz-gNDXG7EEjXM-unsplash (1).jpg" alt="Image 2"
-                                class="card-img-top">
+                            <img src="/images/andrey-grodz-gNDXG7EEjXM-unsplash (1).jpg"
+                                alt="Classic whiskey sour cocktail garnished with a lemon peel." class="card-img-top">
                             <div class="card-body">
                                 <p class="card-text">2 ounces bourbon 3/4 ounce lemon juice, freshly squeezed 1/2 ounce
                                     simple syrup 1/2 ounce egg white</p>
@@ -196,7 +201,7 @@
 
     </main>
     <footer>
-        <p class="text-center fixed-bottom">
+        <p class="text-center mt-5">
             &copy Adrian Mikkelsen Johannessen | All rights reserved
         </p>
     </footer>
