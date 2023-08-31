@@ -3,7 +3,6 @@
 @import "./login";
 @import "./feed";
 @import "./profile";
-@import "./footer";
 @import "../../node_modules/bootstrap/scss/bootstrap";
 
 $small-screen: 768px;
@@ -20,11 +19,4 @@ $large-screen: 1024px;
 
 h1 {
     font-family: 'Lobster';
-    text-align: center;
-    padding-top: 2rem;
-}
-
-h1 p {
-    padding-top: 2rem;
-    text-align: center;
 }
