@@ -18,7 +18,7 @@
 
     <header>
         <div class="bs-component bg-error">
-            <nav class="navbar navbar-expand-lg customNavBg d-flex">
+            <nav class="navbar navbar-expand-lg bg-primary d-flex p-2">
                 <a class="navbar-brand logo fs-2" href="/index.html">
                     ConnectVerse
                 </a>
@@ -33,10 +33,10 @@
                             <a class="nav-link d-flex" href="/index.html">Login</a>
                         </li>
                         <li class="nav-item ml-3">
-                            <a class="nav-link d-flex" href="./feed/feed.html">Feed</a>
+                            <a class="nav-link d-flex" href="../feed/index.html">Feed</a>
                         </li>
                         <li class="nav-item ml-3">
-                            <a class="nav-link d-flex" href="./profile/profile.html">Profile</a>
+                            <a class="nav-link d-flex" href="../profile/index.html">Profile</a>
                         </li>
                     </ul>
                     <form class="form d-flex justify-content-between my-lg-0">
@@ -61,28 +61,28 @@
                 <h2 class="fs-1 mb-3">Hello Again</h2>
                 <p>Welcome back!</p>
             </div>
-            <form action="./profile/profile.html">
-                <div class="input-group mb-3">
-                    <input type="text" required class="form-control form-control-lg bg-light fs-6"
-                        placeholder="Email address">
+            <form action="./profile/index.html">
+                <h1 class="h3 mb-3 fw-normal text-center">Login</h1>
+
+                <div class="form-floating bg m-2">
+                    <input type="email" class="form-control bg-light" required id="floatingInput"
+                        placeholder="name@example.com">
+                    <label for="floatingInput">Email address</label>
                 </div>
-                <div class="input-group mb-1">
-                    <input type="password" required minlength="8" class="form-control form-control-lg bg-light fs-6"
+                <div class="form-floating m-2">
+                    <input type="password" class="form-control bg-light" required minlength="8" id="floatingPassword"
                         placeholder="Password">
+                    <label for="floatingPassword">Password</label>
                 </div>
-                <div class="input-group mb-5 d-flex justify-content-between">
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="formCheck">
-                        <label for="formCheck" class="form-check-label text-secondary"><small>Remember
-                                Me</small></label>
-                        <input type="checkbox" class="form-check-input visually-hidden" id="registerCheck">
-                    </div>
+
+                <div class="form-check text-start my-3">
+                    <input class="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        Remember me
+                    </label>
                 </div>
-                <a href="./profile/profile.html">
-                    <button class="btn btn-lg btn-success w-100 fs-6">Login / Register</button>
-                </a>
-        </div>
-        </form>
+                <button class="btn btn-success w-100 py-2" type="submit">Login / Register</button>
+            </form>
     </main>
 
 

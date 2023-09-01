@@ -1,22 +1,11 @@
 .card-container {
 
     .card {
-        align-items: center; 
-        background-color: $primary;
         border: 1px solid $light;
         transition: transform 0.3s ease-in-out;
 
         &:hover {
             transform: translateY(-5px);
-        }
-
-        img {
-            max-width: 100px; 
-        }
-
-        h3 {
-            font-size: 1.2rem;
-            margin: 0;
         }
     }
 }

@@ -3,26 +3,12 @@
     background-color: $bg-color;
 
     form {
-        flex-direction: column;
-
-        input { 
-            padding: 8px;
-            border: 1px solid $light;
-            border-radius: 4px;
-        }
-
-        button {
-            background-color: $success;
-            border: none;
-            font-weight: bold;
 
             color: $text-color;
-            border-radius: 4px;
             cursor: pointer;
 
             &:hover {
                 background-color: darken($success, 10%);
-            }
         }
     }
 }

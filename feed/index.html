@@ -17,8 +17,8 @@
 <body>
 
     <header>
-        <div class="bs-component">
-            <nav class="navbar navbar-expand-lg bg-primary d-flex">
+        <div class="bs-component bg-error">
+            <nav class="navbar navbar-expand-lg bg-primary d-flex p-2">
                 <a class="navbar-brand logo fs-2" href="/index.html">
                     ConnectVerse
                 </a>
@@ -33,10 +33,10 @@
                             <a class="nav-link d-flex" href="/index.html">Login</a>
                         </li>
                         <li class="nav-item ml-3">
-                            <a class="nav-link d-flex" href="../feed/feed.html">Feed</a>
+                            <a class="nav-link d-flex" href="../feed/index.html">Feed</a>
                         </li>
                         <li class="nav-item ml-3">
-                            <a class="nav-link d-flex" href="../profile/profile.html">Profile</a>
+                            <a class="nav-link d-flex" href="../profile/index.html">Profile</a>
                         </li>
                     </ul>
                     <form class="form d-flex justify-content-between my-lg-0">
@@ -72,44 +72,73 @@
                     <button type="submit" class="btn btn-primary m-2">Create Post</button>
                 </form>
             </div>
-            <li class="nav-item dropdown list-unstyled">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                    Newest
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Oldest</a>
-                    <a class="dropdown-item" href="#">Most Popular</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Separated link</a>
+            <div>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Sort by
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Newest</a>
+                            <a class="dropdown-item" href="#">Oldest</a>
+                            <a class="dropdown-item" href="#">Most Popular</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Separated link</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="container mt-4">
+            <div class="row">
+                <div class="col-md-6 col-lg-3 mb-3">
+                    <div class="card">
+                        <img src="/images/johanne-pold-jacobsen-ohoOQxgvB0w-unsplash (1).jpg"
+                            alt="Refreshing mojito cocktail with lime, mint leaves, and ice in a glass."
+                            class="card-img-top img-fluid">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">Mojito</h5>
+                        </div>
+                    </div>
                 </div>
-            </li>
-            <div class="card-container d-flex flex-wrap">
-                <div class="feed-card col-md-6 col-lg-3 p-3">
-                    <h3 class="text-center mt-2">Mojito</h3>
-                    <img src="/images/johanne-pold-jacobsen-ohoOQxgvB0w-unsplash (1).jpg"
-                        alt="Refreshing mojito cocktail with lime, mint leaves, and ice in a glass."
-                        class="card-img-top m-100">
+
+                <div class="col-md-6 col-lg-3 mb-3">
+                    <div class="card">
+                        <img src="/images/andrey-grodz-gNDXG7EEjXM-unsplash (1).jpg"
+                            alt="Classic whiskey sour cocktail garnished with a lemon peel."
+                            class="card-img-top img-fluid">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">Whiskey Sour</h5>
+                        </div>
+                    </div>
                 </div>
-                <div class="feed-card col-md-6 col-lg-3 p-3">
-                    <h3 class="text-center mt-2">Whiskey Sour</h3>
-                    <img src="/images/andrey-grodz-gNDXG7EEjXM-unsplash (1).jpg"
-                        alt="Classic whiskey sour cocktail garnished with a lemon peel."
-                        class="card-img-top img-fluid m-100">
+
+                <div class="col-md-6 col-lg-3 mb-3">
+                    <div class="card">
+                        <img src="/images/stanislav-ivanitskiy-VIYPN3KykEU-unsplash 1-min.jpg"
+                            alt="Elegant martini cocktail with a perfect mix of gin or vodka, vermouth, and olive garnish."
+                            class="card-img-top img-fluid">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">Martini</h5>
+                        </div>
+                    </div>
                 </div>
-                <div class="feed-card col-md-6 col-lg-3 p-3">
-                    <h3 class="text-center mt-2">Martini</h3>
-                    <img src="/images/stanislav-ivanitskiy-VIYPN3KykEU-unsplash.jpg"
-                        alt="Elegant martini cocktail with a perfect mix of gin or vodka, vermouth, and olive garnish."
-                        class="card-img-top img-fluid m-100">
-                </div>
-                <div class="feed-card col-md-6 col-lg-3 p-3">
-                    <h3 class="text-center mt-2">Old Fashioned</h3>
-                    <img src="/images/jessica-kantak-bailey-woLpKjQisW8-unsplash (1).jpg"
-                        alt="Timeless Old Fashioned cocktail with bourbon, sugar, bitters, and an orange twist garnish."
-                        class="card-img-top img-fluid m-100">
+
+                <div class="col-md-6 col-lg-3 mb-3">
+                    <div class="card">
+                        <img src="/images/jessica-kantak-bailey-woLpKjQisW8-unsplash (1) 1-min.jpg"
+                            alt="Timeless Old Fashioned cocktail with bourbon, sugar, bitters, and an orange twist garnish."
+                            class="card-img-top img-fluid">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">Old Fashioned</h5>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </div>
+
         </div>
     </main>
     <footer>

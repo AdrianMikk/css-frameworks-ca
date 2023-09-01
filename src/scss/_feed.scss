@@ -1,6 +1,5 @@
 .card-container {
-    flex-direction: row; 
-
+    
     .feed-card {
         flex: 1;
         background-color: $bg-color;
@@ -12,10 +11,4 @@
     }
 }
 
-@media (max-width: 768px) {
-    .card-container {
-        flex-direction: column; 
-        justify-content: flex-start; 
-    }
-}
 

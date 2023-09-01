@@ -5,18 +5,10 @@
 @import "./profile";
 @import "../../node_modules/bootstrap/scss/bootstrap";
 
-$small-screen: 768px;
-$medium-screen: 769px;
-$large-screen: 1024px;
-
 * {
     font-family: 'Poppins', sans-serif;
 }
 
 h1 {
     font-family: 'Lobster';
-}
-
-.customNavBg {
-    background-color: yellow;
 }
