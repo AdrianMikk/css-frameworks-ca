@@ -1,8 +1,8 @@
-@import "variables";
-@import "./header";
-@import "./login";
-@import "./feed";
-@import "./profile";
+@import "./partials/variables";
+@import "../scss/partials/header";
+@import "../scss/partials/login";
+@import "../scss/partials/feed";
+@import "../scss/partials/profile";
 @import "../../node_modules/bootstrap/scss/bootstrap";
 
 * {
