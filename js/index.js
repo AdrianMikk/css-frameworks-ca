@@ -33,7 +33,7 @@
 // });
 
 const API_BASE_URL = "https://api.noroff.dev";
-const postsURL = `${API_BASE_URL}/api/v1/social/posts?_comments=true&_author=true&_reactions=true&_count=true&_limit=20&_sort=createdAt:desc`;
+const postsURL = `${API_BASE_URL}/api/v1/social/posts?_author=true&limit=20`;
 const token = localStorage.getItem("accessToken");
 const fetchOptions = {
     method: "GET",
