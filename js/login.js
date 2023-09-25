@@ -3,7 +3,6 @@ const API_SOCIAL_REGISTER_PATH = "/social/auth/register";
 const API_SOCIAL_REGISTER_URL = `${API_BASE_URL}${API_SOCIAL_REGISTER_PATH}`;
 console.log(API_SOCIAL_REGISTER_URL);
 const loginRegisterButton = document.querySelector("#login-register-btn");
-// console.log(loginRegisterButton)
 
 
 const fetchOptions = {
