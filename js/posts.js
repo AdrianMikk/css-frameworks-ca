@@ -1,49 +1,78 @@
-// // Mock data for posts
-// let posts = [];
+import { apiFetch } from "./components/apifetch.mjs";
 
-// // Function to create a new post
-// function createPost() {
-//     const postText = document.getElementById("post-text").value;
+const fullPostURL = "https://api.noroff.dev/api/v1/social/posts";
+const postFeedContainer = document.getElementById("postFeed");
+const fetchButton = document.getElementById("fetchButton");
+const accessToken = localStorage.getItem("accessToken");
+// console.log(accessToken);
+const searchButton = document.getElementById("searchButton")
 
-//     if (postText.trim() === "") {
-//         alert("Please enter some text for your post.");
-//         return;
-//     }
+// Function to fetch and display posts
+async function displayPosts() {
+    const search = document.getElementById("search")
 
-//     const newPost = {
-//         id: Date.now(),
-//         text: postText,
+    const options = {
+        headers: {
+            Authorization: `Bearer ${accessToken}`,
+        },
+    }
+    try {
+        const postList = await apiFetch(fullPostURL, options);
+
+        // Filter  (FIKSE FILTER) 
+
+        // const filteredData = postList.filter((post) => post.tags.includes(filtered.value))
+
+        // Search
+        const searchedData = postList.filter((post) => post.title.includes(search.value))
+
+        postFeedContainer.innerHTML = ""; // Clear previous posts
+
+        // Loop through the posts and display them
+        searchedData.forEach(({ title, body }) => {
+            const postElement = document.createElement("div");
+            postElement.classList.add("post");
+            postElement.innerHTML = `
+                <h2>${title}</h2>
+                <p>${body}</p>
+            `;
+            postFeedContainer.appendChild(postElement);
+        });
+    } catch (error) {
+        console.log(error);
+        postFeedContainer.innerHTML = "<p>Error fetching posts. Please try again later.</p>";
+    }
+}
+
+fetchButton.addEventListener("click", displayPosts);
+
+displayPosts();
+
+
+// ID
+
+// async function idEvent(event) {
+//     event.preventDefault();
+
+//     const emailInput = document.querySelector("#floatingInput");
+//     // console.log(emailInput);
+//     const passwordInput = document.querySelector("#floatingPassword");
+//     // console.log(passwordInput);
+
+//     const idOption = {
+//         method: "POST",
+//         body: JSON.stringify({
+//             "email": emailInput.value,
+//             "password": passwordInput.value,
+//         }),
+//         headers: {
+//             "Content-Type": "application/json",
+//         },
 //     };
 
-//     posts.push(newPost);
+// const result = await apiFetch(API_SOCIAL_LOGIN_URL, loginOption);
 
-//     // Clear the input field
-//     document.getElementById("post-text").value = "";
+// setToken(result);
 
-//     // Display the new post
-//     displayPosts();
-// }
+// };
 
-// // Function to delete a post
-// function deletePost(id) {
-//     posts = posts.filter((post) => post.id !== id);
-//     displayPosts();
-// }
-
-// // Function to display posts
-// function displayPosts() {
-//     const postList = document.getElementById("post-list-items");
-//     postList.innerHTML = "";
-
-//     for (const post of posts) {
-//         const listItem = document.createElement("li");
-//         listItem.innerHTML = `
-//             <p>${post.text}</p>
-//             <button onclick="deletePost(${post.id})">Delete</button>
-//         `;
-//         postList.appendChild(listItem);
-//     }
-// }
-
-// // Initial display of posts
-// displayPosts();
