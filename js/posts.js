@@ -2,7 +2,7 @@ import { apiFetch } from "./components/apifetch.mjs";
 
 const fullPostURL = "https://api.noroff.dev/api/v1/social/posts";
 const postFeedContainer = document.getElementById("postFeed");
-const fetchButton = document.getElementById("fetchButton");
+const searchForm = document.getElementById("searchForm");
 const accessToken = localStorage.getItem("accessToken");
 // console.log(accessToken);
 const searchButton = document.getElementById("searchButton")
@@ -26,6 +26,11 @@ async function displayPosts() {
         // Search
         const searchedData = postList.filter((post) => post.title.includes(search.value))
 
+        searchForm.addEventListener("submit", (e) => {
+            e.preventDefault()
+            displayPosts()
+        })
+
         postFeedContainer.innerHTML = ""; // Clear previous posts
 
         // Loop through the posts and display them
@@ -47,6 +52,7 @@ async function displayPosts() {
 fetchButton.addEventListener("click", displayPosts);
 
 displayPosts();
+
 
 
 // ID
