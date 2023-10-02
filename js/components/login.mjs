@@ -1,6 +1,17 @@
 import { apiFetch } from "./apifetch.mjs";
 const API_BASE_URL = "https://api.noroff.dev/api/v1";
 
+const profileLink = document.getElementById("navProfile");
+profileLink.addEventListener("click", () => {
+    const token = localStorage.getItem("accessToken");
+    if (token) {
+        window.location.href = `/profile/index.html`;
+    } else {
+        alert("You need to be logged in to view profile!");
+    }
+});
+// console.log(profileLink);
+
 function setToken(result) {
     if (result.accessToken) {
         localStorage.setItem("accessToken", result.accessToken);
@@ -9,7 +20,7 @@ function setToken(result) {
     } else {
         console.error("Access token not found in the response.");
     }
-}
+};
 
 // registerUser(API_SOCIAL_REGISTER_URL, fetchOptions);
 
