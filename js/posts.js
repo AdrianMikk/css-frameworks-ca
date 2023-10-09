@@ -1,100 +1,56 @@
-// import { apiFetch } from "./components/apifetch.mjs";
-
-// const fullPostURL = "https://api.noroff.dev/api/v1/social/posts";
-// const postFeedContainer = document.getElementById("postFeed");
-// const searchForm = document.getElementById("searchForm");
-// const accessToken = localStorage.getItem("accessToken");
-// // console.log(accessToken);
-// const searchButton = document.getElementById("searchButton")
-
-// // Function to fetch and display posts
-// async function displayPosts() {
-//     const search = document.getElementById("search")
-
-//     const options = {
-//         headers: {
-//             Authorization: `Bearer ${accessToken}`,
-//         },
-//     }
-//     try {
-//         const postList = await apiFetch(fullPostURL, options);
-
-//         // Filter  (FIKSE FILTER) 
-
-//         // const filteredData = postList.filter((post) => post.tags.includes(filtered.value))
-
-//         // Search
-//         const searchedData = postList.filter((post) => post.title.includes(search.value))
-
-//         searchForm.addEventListener("submit", (e) => {
-//             e.preventDefault()
-//             displayPosts()
-//         })
-
-//         postFeedContainer.innerHTML = ""; // Clear previous posts
-
-//         // Loop through the posts and display them
-//         searchedData.forEach(({ title, body }) => {
-//             const postElement = document.createElement("div");
-//             postElement.classList.add("post");
-//             postElement.innerHTML = `
-//                 <h2>${title}</h2>
-//                 <p>${body}</p>
-//             `;
-//             postFeedContainer.appendChild(postElement);
-//         });
-//     } catch (error) {
-//         console.log(error);
-//         postFeedContainer.innerHTML = "<p>Error fetching posts. Please try again later.</p>";
-//     }
-// }
-
-// fetchButton.addEventListener("click", displayPosts);
-
-// displayPosts();
-
 import { apiFetch } from "./components/apifetch.mjs";
 
 const fullPostURL = "https://api.noroff.dev/api/v1/social/posts";
 const postFeedContainer = document.getElementById("postFeed");
-const searchForm = document.getElementById("searchForm");
 const searchInput = document.getElementById("search");
-const accessToken = localStorage.getItem("accessToken");
+
+// Add the event listener here
+searchInput.addEventListener("input", () => {
+    displayFilteredPosts(); // Call the filtering function when the input changes
+});
+
+const createPostForm = document.getElementById("createPostForm");
 const fetchButton = document.getElementById("fetchButton");
+const accessToken = localStorage.getItem("accessToken");
+let postList = [];
 
-let postList = []; // Store the fetched posts
+// Cache DOM elements for better performance
+const newPostTitleInput = document.getElementById("newPostTitle");
+const newPostBodyInput = document.getElementById("newPostBody");
 
-async function fetchPosts() {
-    const options = {
-        headers: {
-            Authorization: `Bearer ${accessToken}`,
-        },
-    };
+// Create an edit form and cache its elements
+const editPostForm = document.getElementById("editPostForm");
+const editPostTitleInput = document.getElementById("editPostTitle");
+const editPostBodyInput = document.getElementById("editPostBody");
 
+// Fetch posts and display them
+async function fetchAndDisplayPosts() {
     try {
+        const options = {
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+            },
+        };
         postList = await apiFetch(fullPostURL, options);
+        displayFilteredPosts();
     } catch (error) {
-        console.log(error);
-        postList = [];
+        console.error(error);
+        alert("Failed to fetch posts.");
     }
 }
 
 // Function to filter and display posts
 function displayFilteredPosts() {
     const searchValue = searchInput.value.toLowerCase();
-
     const filteredData = postList.filter((post) => post.title.toLowerCase().includes(searchValue));
 
-    // Clear 
     postFeedContainer.innerHTML = "";
 
-    // Loop through the filtered posts and create Bootstrap cards with images
-    filteredData.forEach(({ title, body, media }) => {
+    filteredData.forEach(({ id, title, body, media }) => {
         const postCard = document.createElement("div");
         postCard.classList.add("col-12", "col-md-6", "col-lg-4", "mb-4");
-
-        // Check if media is null or an empty string
         const imageUrl = media ? media : "https://via.placeholder.com/300";
+        postCard.id = id;
 
         postCard.innerHTML = `
             <div class="card">
@@ -102,51 +58,156 @@ function displayFilteredPosts() {
                 <div class="card-body">
                     <h5 class="card-title">${title}</h5>
                     <p class="card-text">${body}</p>
+                    <button class="btn btn-primary view-post" data-post-id="${id}">View Post</button>
+                    <button class="btn btn-primary edit-post" data-post-id="${id}">Edit Post</button>
+                    <button class="btn btn-danger delete-post" data-post-id="${id}">Delete Post</button>
                 </div>
             </div>
         `;
 
         postFeedContainer.appendChild(postCard);
     });
+
+    addViewPostListeners();
+    addEditPostListeners();
+    addDeletePostListeners();
 }
 
-fetchButton.addEventListener("click", () => {
-    fetchPosts();
-    displayFilteredPosts();
+// Function to add click event listeners to view post buttons
+function addViewPostListeners() {
+    const viewPostButtons = document.querySelectorAll(".view-post");
+    viewPostButtons.forEach((button) => {
+        button.addEventListener("click", (e) => {
+            const postId = e.target.getAttribute("data-post-id");
+            console.log(typeof postId); // Log the post ID to the console
+            const post = postList.find((post) => post.id === parseInt(postId));
+            console.log(post); // Log the post object to the console
+            if (post) {
+                // modal.style.display = "block";
+                // ...
+            } else {
+                alert("Post not found.");
+            }
+        });
+    }
+    )
+};
+
+// Close the modal when the close button is clicked
+const closeModalButton = document.getElementById("closeModalButton");
+closeModalButton.addEventListener("click", () => {
+    modal.style.display = "none";
 });
 
-fetchPosts();
-displayFilteredPosts();
 
-searchInput.addEventListener("input", displayFilteredPosts);
+// Function to add click event listeners to edit post buttons
+function addEditPostListeners() {
+    const editPostButtons = document.querySelectorAll(".edit-post");
+    editPostButtons.forEach((button) => {
+        button.addEventListener("click", (e) => {
+            const postId = e.target.getAttribute("data-post-id");
+            populateEditForm(postId);
+        });
+    });
+}
+
+// Function to populate the edit form with post data
+function populateEditForm(postId) {
+    const post = postList.find((post) => post.id === postId);
+    if (post) {
+        editPostTitleInput.value = post.title;
+        editPostBodyInput.value = post.body;
+        editPostForm.style.display = "block";
+        editPostForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            updatePost(postId);
+        });
+    } else {
+        alert("Post not found.");
+    }
+}
+
+// Function to send a PUT request to update a post
+async function updatePost(postId) {
+    const title = editPostTitleInput.value;
+    const body = editPostBodyInput.value;
+
+    const updatedPostData = {
+        title,
+        body,
+    };
+
+    const options = {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify(updatedPostData),
+    };
+
+    try {
+        const response = await apiFetch(`${fullPostURL}/${postId}`, options);
+
+        if (response && response.id) {
+            alert("Post updated successfully!");
+            fetchAndDisplayPosts(); // Refresh the post list
+            editPostForm.style.display = "none"; // Hide the edit form
+        } else {
+            alert("Failed to update the post.");
+        }
+    } catch (error) {
+        console.error(error);
+        alert("Error updating the post.");
+    }
+}
+
+// Function to add click event listeners to delete post buttons
+function addDeletePostListeners() {
+    const deletePostButtons = document.querySelectorAll(".delete-post");
+    deletePostButtons.forEach((button) => {
+        button.addEventListener("click", (e) => {
+            const postId = e.target.getAttribute("data-post-id");
+            if (confirm("Are you sure you want to delete this post?")) {
+                deletePost(postId);
+            }
+        });
+    });
+}
+
+// Function to send a DELETE request to delete a post
+async function deletePost(postId) {
+    const options = {
+        method: "DELETE",
+        headers: {
+            Authorization: `Bearer ${accessToken}`,
+        },
+    };
+
+    try {
+        const response = await apiFetch(`${fullPostURL}/${postId}`, options);
+
+        if (response && response.message === "Post deleted successfully") {
+            alert("Post deleted successfully!");
+            fetchAndDisplayPosts();
+        } else {
+            alert("Failed to delete the post.");
+        }
+    } catch (error) {
+        console.error(error);
+        alert("Error deleting the post.");
+    }
+}
+
+// Event listeners
+fetchButton.addEventListener("click", fetchAndDisplayPosts);
+createPostForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    createNewPost();
+});
+
+fetchAndDisplayPosts();
 
 
 
-
-// ID
-
-// async function idEvent(event) {
-//     event.preventDefault();
-
-//     const emailInput = document.querySelector("#floatingInput");
-//     // console.log(emailInput);
-//     const passwordInput = document.querySelector("#floatingPassword");
-//     // console.log(passwordInput);
-
-//     const idOption = {
-//         method: "POST",
-//         body: JSON.stringify({
-//             "email": emailInput.value,
-//             "password": passwordInput.value,
-//         }),
-//         headers: {
-//             "Content-Type": "application/json",
-//         },
-//     };
-
-// const result = await apiFetch(API_SOCIAL_LOGIN_URL, loginOption);
-
-// setToken(result);
-
-// };
 
