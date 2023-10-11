@@ -11,7 +11,7 @@ searchInput.addEventListener("input", () => {
 });
 
 const createPostForm = document.getElementById("createPostForm");
-const fetchButton = document.getElementById("fetchButton");
+// const fetchButton = document.getElementById("fetchButton");
 const accessToken = localStorage.getItem("accessToken");
 let postList = [];
 
@@ -269,7 +269,7 @@ function displayFilteredPosts() {
     }
 
     // Event listeners
-    fetchButton.addEventListener("click", fetchAndDisplayPosts);
+    // fetchButton.addEventListener("click", fetchAndDisplayPosts);
 
     // Add an event listener for the form submission
     createPostForm.addEventListener("submit", (e) => {
