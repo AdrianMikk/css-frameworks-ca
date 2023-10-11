@@ -1,5 +1,5 @@
-import { loginEvent } from "./components/login.mjs";
-import { registerEvent } from "./components/register.mjs";
+import { loginEvent } from "./API/login.mjs";
+import { registerEvent } from "./API/register.mjs";
 const loginRegisterButton = document.querySelector("#login-register-btn");
 const registerButton = document.querySelector("#register-btn");
 

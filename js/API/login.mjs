@@ -1,4 +1,5 @@
-import { apiFetch } from "./apifetch.mjs";
+import { apiFetch } from "./apiFetch.mjs";
+
 const API_BASE_URL = "https://api.noroff.dev/api/v1";
 
 const profileLink = document.getElementById("navProfile");
@@ -18,7 +19,7 @@ function setToken(result) {
         console.log(result.accessToken);
         window.location.href = "/profile/index.html"
     } else {
-        console.error("Access token not found in the response.");
+        throw new Error("Access token not found in the response.")
     }
 };
 
