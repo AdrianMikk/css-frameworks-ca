@@ -18,6 +18,7 @@
     position: relative;
     top: 50%;
     transform: translateY(-50%);
+    text-align: center;
   }
 
   .close {
@@ -34,8 +35,10 @@
   }
 
   img {
-    max-width: 100%;
-    height: auto;
+    max-height: 300px; 
+    width: 100%;
+    height: auto; 
+    object-fit: contain; // cover??
     margin: 10px 0;
   }
 

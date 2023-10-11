@@ -118,6 +118,29 @@ function displayFilteredPosts() {
     addDeletePostListeners();
 
 
+    // const dropdownSort = document.getElementById("navbarDropdown");
+
+    // // Add an event listener to the dropdown menu items
+    // const dropdownItems = document.querySelectorAll(".dropdown-item");
+    // dropdownItems.forEach((item) => {
+    //     item.addEventListener("click", () => {
+    //         const sortValue = item.getAttribute("data-sort-value");
+    //         dropdownSort.textContent = item.textContent;
+    //         sortPosts(sortValue);
+    //     });
+    // });
+
+    // function sortPosts(sortValue) {
+    //     if (sortValue === "newest") {
+    //         postList.sort((a, b) => b.id - a.id);
+    //     } else if (sortValue === "oldest") {
+    //         postList.sort((a, b) => a.id - b.id);
+    //     }
+    //     displayFilteredPosts();
+    // }
+
+
+
     /**
      * Add click event listeners to "View Post" buttons.
      * When a button is clicked, display the post content or handle accordingly.
