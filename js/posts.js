@@ -1,9 +1,22 @@
 import { apiFetch } from "./API/apiFetch.mjs";
 import { createNewElement } from "./utils/createNewElement.mjs";
+import { createNewPost } from "./createPost.mjs";
+import { addEditPostListeners } from "./editposts.js";
+import { addDeletePostListeners } from "./deletePost.js";
+
 
 const fullPostURL = "https://api.noroff.dev/api/v1/social/posts";
 const postFeedContainer = document.getElementById("postFeed");
 const searchInput = document.getElementById("search");
+
+const newPostTitleInput = document.getElementById("newPostTitle");
+const newPostBodyInput = document.getElementById("newPostBody");
+const newPostImageInput = document.getElementById("newPostImageInput");
+
+const editPostButton = document.querySelector(".edit-post")
+const viewPostButton = document.getElementById("viewPostButton");
+const deleteButton = document.getElementById("deleteButton");
+
 
 // Add the event listener here
 searchInput.addEventListener("input", () => {
@@ -13,31 +26,32 @@ searchInput.addEventListener("input", () => {
 const createPostForm = document.getElementById("createPostForm");
 // const fetchButton = document.getElementById("fetchButton");
 const accessToken = localStorage.getItem("accessToken");
+const loggedInEmail = localStorage.getItem("email");
+const loggedInName = localStorage.getItem("name");
 let postList = [];
-
-// Cache DOM elements for better performance
-const newPostTitleInput = document.getElementById("newPostTitle");
-const newPostBodyInput = document.getElementById("newPostBody");
-const newPostImageInput = document.getElementById("newPostImageInput");
 
 // Create an edit form and cache its elements
 const editPostForm = document.getElementById("editPostForm");
 const editPostTitleInput = document.getElementById("editPostTitle");
 const editPostBodyInput = document.getElementById("editPostBody");
-const editPostImageInput = document.getElementById("editPostImage");
 
 // Modal
-const modal = document.getElementById("postModal");
+const postModal = document.getElementById("postModal");
+const editPostModal = document.getElementById("editPostModal");
 
 // Fetch posts and display them
-async function fetchAndDisplayPosts() {
+export async function fetchAndDisplayPosts() {
+    if (!accessToken) {
+        location.href = "/index.html";
+    }
     try {
         const options = {
             headers: {
                 Authorization: `Bearer ${accessToken}`,
             },
         };
-        postList = await apiFetch(fullPostURL, options);
+        postList = await apiFetch(fullPostURL + `?_author=true`, options);
+        console.log(postList)
         displayFilteredPosts();
     } catch (error) {
         console.error(error);
@@ -49,13 +63,13 @@ async function fetchAndDisplayPosts() {
 /**
  * Filter and display posts based on the search input value.
  */
-function displayFilteredPosts() {
+function displayFilteredPosts(filterMethod) {
     const searchValue = searchInput.value.toLowerCase();
     const filteredData = postList.filter((post) => post.title.toLowerCase().includes(searchValue));
 
     postFeedContainer.innerHTML = "";
 
-    filteredData.forEach(({ id, title, body, media }) => {
+    filteredData.forEach(({ id, title, body, media, author }) => {
         const postCard = document.createElement("div");
         postCard.classList.add("col-12", "col-md-6", "col-lg-4", "mb-4");
         const imageUrl = media ? media : "https://via.placeholder.com/300";
@@ -101,9 +115,10 @@ function displayFilteredPosts() {
         cardBodyDiv.appendChild(titleElement);
         cardBodyDiv.appendChild(bodyElement);
         cardBodyDiv.appendChild(viewButton);
-        cardBodyDiv.appendChild(editButton);
-        cardBodyDiv.appendChild(deleteButton);
-
+        if (author.name === loggedInName) {
+            cardBodyDiv.appendChild(editButton);
+            cardBodyDiv.appendChild(deleteButton);
+        }
         cardDiv.appendChild(image);
         cardDiv.appendChild(cardBodyDiv);
 
@@ -116,29 +131,6 @@ function displayFilteredPosts() {
     addViewPostListeners();
     addEditPostListeners();
     addDeletePostListeners();
-
-
-    // const dropdownSort = document.getElementById("navbarDropdown");
-
-    // // Add an event listener to the dropdown menu items
-    // const dropdownItems = document.querySelectorAll(".dropdown-item");
-    // dropdownItems.forEach((item) => {
-    //     item.addEventListener("click", () => {
-    //         const sortValue = item.getAttribute("data-sort-value");
-    //         dropdownSort.textContent = item.textContent;
-    //         sortPosts(sortValue);
-    //     });
-    // });
-
-    // function sortPosts(sortValue) {
-    //     if (sortValue === "newest") {
-    //         postList.sort((a, b) => b.id - a.id);
-    //     } else if (sortValue === "oldest") {
-    //         postList.sort((a, b) => a.id - b.id);
-    //     }
-    //     displayFilteredPosts();
-    // }
-
 
 
     /**
@@ -163,7 +155,7 @@ function displayFilteredPosts() {
                     modalTitle.textContent = post.title;
                     modalBody.textContent = post.body;
                     modalImage.src = post.media;
-                    modal.style.display = "block";
+                    postModal.style.display = "block";
                 } else {
                     alert("Post not found.");
                 }
@@ -173,123 +165,8 @@ function displayFilteredPosts() {
 
     const closeModalButton = document.getElementById("closeModalButton");
     closeModalButton.addEventListener("click", () => {
-        modal.style.display = "none";
+        postModal.style.display = "none";
     });
-
-
-    /**
-     * Add click event listeners to "Edit Post" buttons.
-     * When a button is clicked, populate the edit form with the post data.
-     */
-    function addEditPostListeners() {
-        const editPostButtons = document.querySelectorAll(".edit-post");
-        editPostButtons.forEach((button) => {
-            button.addEventListener("click", (e) => {
-                const postId = e.target.getAttribute("data-post-id");
-                populateEditForm(postId);
-            });
-        });
-    }
-
-    /**
-     * Populate the edit form with post data based on the given post ID.
-     * @param {number} postId - The ID of the post to populate the form with.
-     */
-    function populateEditForm(postId) {
-        const post = postList.find((post) => post.id === postId);
-        if (post) {
-            editPostTitleInput.value = post.title;
-            editPostBodyInput.value = post.body;
-            editPostForm.style.display = "block";
-            editPostForm.addEventListener("submit", (e) => {
-                e.preventDefault();
-                updatePost(postId);
-            });
-        } else {
-            alert("Post not found.");
-        }
-    }
-
-    /**
-     * Update a post with the provided data.
-     * @param {number} postId - The ID of the post to update.
-     */
-    async function updatePost(postId) {
-        const title = editPostTitleInput.value;
-        const body = editPostBodyInput.value;
-        const media = editPostImageInput.value;
-
-        const updatedPostData = {
-            title,
-            body,
-            media,
-        };
-
-        const options = {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${accessToken}`,
-            },
-            body: JSON.stringify(updatedPostData),
-        };
-
-        try {
-            const response = await apiFetch(`${fullPostURL}/${postId}`, options);
-
-            if (response && response.id) {
-                alert("Post updated successfully!");
-                fetchAndDisplayPosts(); // Refresh the post list
-                editPostForm.style.display = "none"; // Hide the edit form
-            } else {
-                alert("Failed to update the post.");
-            }
-        } catch (error) {
-            console.error(error);
-            alert("Error updating the post.");
-        }
-    }
-
-    /**
-     * Add click event listeners to "Delete Post" buttons.
-     * When a button is clicked, prompt the user for confirmation and delete the post if confirmed.
-     */
-    function addDeletePostListeners() {
-        const deletePostButtons = document.querySelectorAll(".delete-post");
-        deletePostButtons.forEach((button) => {
-            button.addEventListener("click", (e) => {
-                const postId = e.target.getAttribute("data-post-id");
-                if (confirm("Are you sure you want to delete this post?")) {
-                    deletePost(postId);
-                }
-            });
-        });
-    }
-
-    /**
-     * Delete a post with the provided post ID.
-     * @param {number} postId - The ID of the post to delete.
-     */
-    async function deletePost(postId) {
-        const options = {
-            method: "DELETE",
-            headers: {
-                Authorization: `Bearer ${accessToken}`,
-            },
-        };
-
-        try {
-            const response = await apiFetch(`${fullPostURL}/${postId}`, options);
-
-            if (response) {
-                alert("Post deleted successfully!");
-                fetchAndDisplayPosts();
-            }
-        } catch (error) {
-            console.error(error);
-            alert("Error deleting the post.");
-        }
-    }
 
     // Event listeners
     // fetchButton.addEventListener("click", fetchAndDisplayPosts);
@@ -323,30 +200,8 @@ function displayFilteredPosts() {
 
         // Send the POST request to create a new post
         createNewPost(options);
-    });
-
-    /**
-     * Create a new post by sending a POST request to the API.
-     *
-     * @param {Object} options - The options for the POST request, including headers and request data.
-     * @throws {Error} Throws an error if the POST request fails.
-     */
-    async function createNewPost(options) {
-        try {
-            const response = await apiFetch(fullPostURL, options);
-
-            if (response && response.id) {
-                alert("Post created successfully!");
-                fetchAndDisplayPosts(); // Refresh the post list
-                createPostForm.reset(); // Reset the form
-            } else {
-                alert("Failed to create the post.");
-            }
-        } catch (error) {
-            console.error(error);
-            alert("Error creating the post.");
-        }
-    }
-}
+    })
+};
+// editPostButton.addEventListener("click", addEditPostListeners);
 
 fetchAndDisplayPosts();

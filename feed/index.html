@@ -86,8 +86,8 @@
                             Sort by
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Newest</a>
-                            <a class="dropdown-item" href="#">Oldest</a>
+                            <a class="dropdown-item" id="newestPost" href="#">Newest</a>
+                            <a class="dropdown-item" id="oldestPost" href="#">Oldest</a>
                         </div>
                     </li>
                 </ul>
@@ -102,6 +102,18 @@
                 <h2 id="modalTitle"></h2>
                 <img id="modalImage">
                 <p id="modalBody"></p>
+            </div>
+        </div>
+        <div id="editPostModal" class="modal-dialog">
+            <div class="modal-content">
+                <span class="post-id" id="editPostId"></span>
+                <span id="editCloseModalButton" class="close">&times;</span>
+                <h2 id="modalTitle"></h2>
+                <form action="" id="editPostForm">
+                    <input type="edit-title" id="editTitle">
+                    <textarea name="edit-body" id="editBody" cols="30" rows="5"></textarea>
+                    <button id="updatePostButton">Update Post</button>
+                </form>
             </div>
         </div>
 

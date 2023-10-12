@@ -1,4 +1,4 @@
-#postModal {
+#postModal, #editPostModal {
   display: none;
   position: fixed;
   top: 0;
@@ -9,7 +9,7 @@
   z-index: 999;
   overflow: auto;
 }
-#postModal .modal-content {
+#postModal .modal-content, #editPostModal .modal-content {
   background-color: #fff;
   border-radius: 10px;
   max-width: 60%;
@@ -20,25 +20,25 @@
   transform: translateY(-50%);
   text-align: center;
 }
-#postModal .close {
+#postModal .close, #editPostModal .close {
   font-size: 24px;
   position: absolute;
   top: 10px;
   right: 10px;
   cursor: pointer;
 }
-#postModal h2 {
+#postModal h2, #editPostModal h2 {
   font-size: 24px;
   font-weight: bold;
 }
-#postModal img {
+#postModal img, #editPostModal img {
   max-height: 300px;
   width: 100%;
   height: auto;
   object-fit: contain;
   margin: 10px 0;
 }
-#postModal p {
+#postModal p, #editPostModal p {
   font-size: 16px;
   margin: 10px 0;
 }/*# sourceMappingURL=postmodal.css.map */

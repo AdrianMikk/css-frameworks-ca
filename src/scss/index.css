@@ -11918,12 +11918,13 @@ header .nav-links:hover {
 #postModal .modal-content {
   background-color: #fff;
   border-radius: 10px;
-  max-width: 80%;
+  max-width: 60%;
   margin: 0 auto;
   padding: 20px;
   position: relative;
   top: 50%;
   transform: translateY(-50%);
+  text-align: center;
 }
 #postModal .close {
   font-size: 24px;
@@ -11937,8 +11938,10 @@ header .nav-links:hover {
   font-weight: bold;
 }
 #postModal img {
-  max-width: 100%;
+  max-height: 300px;
+  width: 100%;
   height: auto;
+  object-fit: contain;
   margin: 10px 0;
 }
 #postModal p {

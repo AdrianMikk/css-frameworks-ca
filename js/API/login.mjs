@@ -11,13 +11,14 @@ profileLink.addEventListener("click", () => {
         alert("You need to be logged in to view profile!");
     }
 });
-// console.log(profileLink);
 
 function setToken(result) {
     if (result.accessToken) {
         localStorage.setItem("accessToken", result.accessToken);
+        localStorage.setItem("email", result.email);
+        localStorage.setItem("name", result.name);
         console.log(result.accessToken);
-        window.location.href = "/profile/index.html"
+        window.location.href = "/feed/index.html"
     } else {
         throw new Error("Access token not found in the response.")
     }
