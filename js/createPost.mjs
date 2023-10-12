@@ -31,20 +31,16 @@ export async function createNewPost(options) {
     }
 }
 
-// Get the values of the title and body inputs
 const title = newPostTitleInput.value;
 const body = newPostBodyInput.value;
 const media = newPostImageInput.value;
 
-
-// Create an object with the new post data
 const newPostData = {
     title,
     body,
     media,
 };
 
-// Define the options for the POST request
 const options = {
     method: "POST",
     headers: {

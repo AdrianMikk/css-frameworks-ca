@@ -19,6 +19,14 @@ export function addEditPostListeners() {
     });
 }
 
+/**
+ * Opens an edit form for a specific post.
+ *
+ * This function displays an edit form for a post with the provided postId,
+ * allowing users to edit the post's title and body. 
+ *
+ * @param {number} postId - The unique identifier of the post to be edited.
+ */
 function openEditForm(postId) {
     const editTitle = document.getElementById("editTitle");
     const editBody = document.getElementById("editBody");
@@ -67,3 +75,4 @@ async function updatePost(postId, updatedTitle, updatedBody) {
         alert("Error updating the post.");
     }
 }
+

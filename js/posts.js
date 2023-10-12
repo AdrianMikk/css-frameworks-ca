@@ -17,20 +17,16 @@ const editPostButton = document.querySelector(".edit-post")
 const viewPostButton = document.getElementById("viewPostButton");
 const deleteButton = document.getElementById("deleteButton");
 
-
-// Add the event listener here
 searchInput.addEventListener("input", () => {
-    displayFilteredPosts(); // Call the filtering function when the input changes
+    displayFilteredPosts();
 });
 
 const createPostForm = document.getElementById("createPostForm");
-// const fetchButton = document.getElementById("fetchButton");
 const accessToken = localStorage.getItem("accessToken");
 const loggedInEmail = localStorage.getItem("email");
 const loggedInName = localStorage.getItem("name");
 let postList = [];
 
-// Create an edit form and cache its elements
 const editPostForm = document.getElementById("editPostForm");
 const editPostTitleInput = document.getElementById("editPostTitle");
 const editPostBodyInput = document.getElementById("editPostBody");
@@ -75,43 +71,34 @@ function displayFilteredPosts(filterMethod) {
         const imageUrl = media ? media : "https://via.placeholder.com/300";
         postCard.id = id;
 
-        // Create the outer div element with the "card" class
         const cardDiv = createNewElement("div", { class: "card" })
 
-        // Create the image element
         const image = createNewElement("img", { src: imageUrl, alt: title, class: "card-img-top" });
 
-        // Create the card body div
         const cardBodyDiv = createNewElement("div", { class: "card-body" });
 
-        // Create the title element
         const titleElement = createNewElement("h5", { class: "card-title", textContent: title });
 
-        // Create the body element
         const bodyElement = createNewElement("p", { class: "card-text", textContent: body });
 
-        // Create the "View Post" button
         const viewButton = createNewElement("button", {
             class: "btn btn-primary view-post",
             "data-post-id": id,
             textContent: "View Post",
         });
 
-        // Create the "Edit Post" button
         const editButton = createNewElement("button", {
             class: "btn btn-primary edit-post",
             "data-post-id": id,
             textContent: "Edit Post",
         });
 
-        // Create the "Delete Post" button
         const deleteButton = createNewElement("button", {
             class: "btn btn-danger delete-post",
             "data-post-id": id,
             textContent: "Delete Post",
         });
 
-        // Append all the elements to build the card
         cardBodyDiv.appendChild(titleElement);
         cardBodyDiv.appendChild(bodyElement);
         cardBodyDiv.appendChild(viewButton);
@@ -122,7 +109,6 @@ function displayFilteredPosts(filterMethod) {
         cardDiv.appendChild(image);
         cardDiv.appendChild(cardBodyDiv);
 
-        // Add the card to the postCard element or wherever you want it in your DOM
         postCard.appendChild(cardDiv);
 
         postFeedContainer.appendChild(postCard);
@@ -168,20 +154,14 @@ function displayFilteredPosts(filterMethod) {
         postModal.style.display = "none";
     });
 
-    // Event listeners
-    // fetchButton.addEventListener("click", fetchAndDisplayPosts);
 
-    // Add an event listener for the form submission
     createPostForm.addEventListener("submit", (e) => {
         e.preventDefault();
 
-        // Get the values of the title and body inputs
         const title = newPostTitleInput.value;
         const body = newPostBodyInput.value;
         const media = newPostImageInput.value;
 
-
-        // Create an object with the new post data
         const newPostData = {
             title,
             body,
