@@ -20,8 +20,8 @@ export async function createNewPost(options) {
 
         if (response && response.id) {
             alert("Post created successfully!");
-            fetchAndDisplayPosts(); // Refresh the post list
-            createPostForm.reset(); // Reset the form
+            fetchAndDisplayPosts();
+            createPostForm.reset();
         } else {
             alert("Failed to create the post.");
         }

@@ -18,15 +18,12 @@ const editPostButton = document.querySelector(".edit-post")
 const viewPostButton = document.getElementById("viewPostButton");
 const deleteButton = document.getElementById("deleteButton");
 
-searchInput.addEventListener("input", () => {
-    displayFilteredPosts();
-});
+searchInput.addEventListener("input", search);
 
 const createPostForm = document.getElementById("createPostForm");
 const accessToken = localStorage.getItem("accessToken");
 const loggedInEmail = localStorage.getItem("email");
 const loggedInName = localStorage.getItem("name");
-let postList = [];
 
 const editPostForm = document.getElementById("editPostForm");
 const editPostTitleInput = document.getElementById("editPostTitle");
@@ -36,7 +33,6 @@ const editPostBodyInput = document.getElementById("editPostBody");
 const postModal = document.getElementById("postModal");
 const editPostModal = document.getElementById("editPostModal");
 
-// Fetch posts and display them
 export async function fetchAndDisplayPosts() {
     if (!accessToken) {
         location.href = "/index.html";
@@ -47,17 +43,14 @@ export async function fetchAndDisplayPosts() {
                 Authorization: `Bearer ${accessToken}`,
             },
         };
-        postList = await apiFetch(fullPostURL + `?_author=true`, options);
-        console.log(postList)
-        displayFilteredPosts();
-        // return postList
+        let postList = await apiFetch(fullPostURL + `?_author=true`, options);
+        console.log(postList);
+        displayFilteredPosts(postList);
     } catch (error) {
         console.error(error);
         alert("Failed to fetch posts.");
     }
 }
-
-search();
 
 /**
  * Filter and display posts based on the search input value.
@@ -66,7 +59,8 @@ export function displayFilteredPosts(data) {
 
     postFeedContainer.innerHTML = "";
 
-    postList.forEach(({ id, title, body, media, author }) => {
+    data.forEach(({ id, title, body, media, author }) => {
+
         const postCard = document.createElement("div");
         postCard.classList.add("col-12", "col-md-6", "col-lg-4", "mb-4");
         const imageUrl = media ? media : "https://via.placeholder.com/300";
@@ -120,100 +114,25 @@ export function displayFilteredPosts(data) {
     addDeletePostListeners();
 
 
+
+    // Filter posts by date
     async function filterPost() {
         const dropdownMenu = document.getElementById("dropdownMenu");
         const filterNewPost = document.getElementById("newestPost");
         const filterOldPost = document.getElementById("oldestPost");
         filterNewPost.addEventListener("click", (e) => {
-            const postsAsc = postList.sort(
-                (a, b) => new Date(b.created) - new Date(a.created))
-            console.log(postsAsc)
+            fetchAndDisplayPosts()
         }
         )
         filterOldPost.addEventListener("click", (e) => {
-            const postsDesc = postList.sort(
+            const postsDesc = data.sort(
                 (a, b) => new Date(a.created) - new Date(b.created))
             console.log(postsDesc)
+            displayFilteredPosts(postsDesc);
         }
         )
     };
     filterPost();
-
-
-    /**
-     * Filter and display posts based on the search input value.
-     */
-    // function displayFilteredPosts(filterMethod) {
-    //     const searchValue = searchInput.value.toLowerCase();
-    //     const filteredData = postList.filter((post) => post.title.toLowerCase().includes(searchValue));
-
-    //     postFeedContainer.innerHTML = "";
-
-    //     filteredData.forEach(({ id, title, body, media, author }) => {
-    //         const postCard = document.createElement("div");
-    //         postCard.classList.add("col-12", "col-md-6", "col-lg-4", "mb-4");
-    //         const imageUrl = media ? media : "https://via.placeholder.com/300";
-    //         postCard.id = id;
-
-    //         const cardDiv = createNewElement("div", { class: "card" })
-
-    //         const image = createNewElement("img", { src: imageUrl, alt: title, class: "card-img-top" });
-
-    //         const cardBodyDiv = createNewElement("div", { class: "card-body" });
-
-    //         const titleElement = createNewElement("h5", { class: "card-title", textContent: title });
-
-    //         const bodyElement = createNewElement("p", { class: "card-text", textContent: body });
-
-    //         const viewButton = createNewElement("button", {
-    //             class: "btn btn-primary view-post",
-    //             "data-post-id": id,
-    //             textContent: "View Post",
-    //         });
-
-    //         const editButton = createNewElement("button", {
-    //             class: "btn btn-primary edit-post",
-    //             "data-post-id": id,
-    //             textContent: "Edit Post",
-    //         });
-
-    //         const deleteButton = createNewElement("button", {
-    //             class: "btn btn-danger delete-post",
-    //             "data-post-id": id,
-    //             textContent: "Delete Post",
-    //         });
-
-    //         cardBodyDiv.appendChild(titleElement);
-    //         cardBodyDiv.appendChild(bodyElement);
-    //         cardBodyDiv.appendChild(viewButton);
-    //         if (author.name === loggedInName) {
-    //             cardBodyDiv.appendChild(editButton);
-    //             cardBodyDiv.appendChild(deleteButton);
-    //         }
-    //         cardDiv.appendChild(image);
-    //         cardDiv.appendChild(cardBodyDiv);
-
-    //         postCard.appendChild(cardDiv);
-
-    //         postFeedContainer.appendChild(postCard);
-    //     });
-
-    //     addViewPostListeners();
-    //     addEditPostListeners();
-    //     addDeletePostListeners();
-
-
-    //     async function filterPost() {
-    //         const dropdownMenu = document.getElementById("dropdownMenu");
-    //         const filterNewPost = document.getElementById("newestPost");
-    //         const filterOldPost = document.getElementById("oldestPost");
-    //         filterNewPost.addEventListener("click", (e) => {
-    //             console.log(filterNewPost.innerText);
-    //         }
-    //         )
-    //     };
-    //     filterPost();
-
 
     /**
      * Add click event listeners to "View Post" buttons.
@@ -224,10 +143,9 @@ export function displayFilteredPosts(data) {
         viewPostButtons.forEach((button) => {
             button.addEventListener("click", (e) => {
                 const postId = e.target.getAttribute("data-post-id");
-                // displayPostInModal(postId);
                 console.log(postId);
-                const post = postList.find((post) => post.id === parseInt(postId));
-                console.log(post); // Log the post object to the console
+                const post = data.find((post) => post.id === parseInt(postId));
+                console.log(post);
                 if (post) {
                     const modalTitle = document.getElementById("modalTitle");
                     const modalBody = document.getElementById("modalBody");
@@ -264,7 +182,6 @@ export function displayFilteredPosts(data) {
             media,
         };
 
-        // Define the options for the POST request
         const options = {
             method: "POST",
             headers: {
@@ -274,10 +191,8 @@ export function displayFilteredPosts(data) {
             body: JSON.stringify(newPostData),
         };
 
-        // Send the POST request to create a new post
         createNewPost(options);
     })
 };
-// editPostButton.addEventListener("click", addEditPostListeners);
 
 fetchAndDisplayPosts();

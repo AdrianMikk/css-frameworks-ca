@@ -1,16 +1,18 @@
-import { fetchAndDisplayPosts } from './posts.js';
+import { apiFetch } from './API/apiFetch.mjs';
 import { displayFilteredPosts } from './posts.js';
 
-// const accessToken = localStorage.getItem("accessToken");
+const accessToken = localStorage.getItem("accessToken");
 const searchInput = document.getElementById("search");
-// let postList = await fetchAndDisplayPosts();
-// console.log(postList)
+const fullPostURL = "https://api.noroff.dev/api/v1/social/posts?_author=true";
 
 export async function search() {
-    const postData = await fetchAndDisplayPosts();
+    const options = {
+        headers: {
+            Authorization: `Bearer ${accessToken}`,
+        },
+    };
+    const postData = await apiFetch(fullPostURL, options);
     const searchValue = searchInput.value.toLowerCase();
     const filteredData = postData.filter((post) => post.title.toLowerCase().includes(searchValue));
-    console.log(filteredData);
-    // displayFilteredPosts(filteredData);
+    displayFilteredPosts(filteredData);
 }
-// search();

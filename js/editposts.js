@@ -13,7 +13,6 @@ export function addEditPostListeners() {
     editPostButtons.forEach((button) => {
         button.addEventListener("click", (e) => {
             const postId = e.target.getAttribute("data-post-id");
-            // console.log(postId);
             openEditForm(postId);
         });
     });
