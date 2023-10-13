@@ -3,6 +3,7 @@ import { createNewElement } from "./utils/createNewElement.mjs";
 import { createNewPost } from "./createPost.mjs";
 import { addEditPostListeners } from "./editposts.js";
 import { addDeletePostListeners } from "./deletePost.js";
+import { search } from "./search.mjs";
 
 
 const fullPostURL = "https://api.noroff.dev/api/v1/social/posts";
@@ -49,23 +50,23 @@ export async function fetchAndDisplayPosts() {
         postList = await apiFetch(fullPostURL + `?_author=true`, options);
         console.log(postList)
         displayFilteredPosts();
+        // return postList
     } catch (error) {
         console.error(error);
         alert("Failed to fetch posts.");
     }
 }
 
+search();
 
 /**
  * Filter and display posts based on the search input value.
  */
-function displayFilteredPosts(filterMethod) {
-    const searchValue = searchInput.value.toLowerCase();
-    const filteredData = postList.filter((post) => post.title.toLowerCase().includes(searchValue));
+export function displayFilteredPosts(data) {
 
     postFeedContainer.innerHTML = "";
 
-    filteredData.forEach(({ id, title, body, media, author }) => {
+    postList.forEach(({ id, title, body, media, author }) => {
         const postCard = document.createElement("div");
         postCard.classList.add("col-12", "col-md-6", "col-lg-4", "mb-4");
         const imageUrl = media ? media : "https://via.placeholder.com/300";
@@ -117,6 +118,101 @@ function displayFilteredPosts(filterMethod) {
     addViewPostListeners();
     addEditPostListeners();
     addDeletePostListeners();
+
+
+    async function filterPost() {
+        const dropdownMenu = document.getElementById("dropdownMenu");
+        const filterNewPost = document.getElementById("newestPost");
+        const filterOldPost = document.getElementById("oldestPost");
+        filterNewPost.addEventListener("click", (e) => {
+            const postsAsc = postList.sort(
+                (a, b) => new Date(b.created) - new Date(a.created))
+            console.log(postsAsc)
+        }
+        )
+        filterOldPost.addEventListener("click", (e) => {
+            const postsDesc = postList.sort(
+                (a, b) => new Date(a.created) - new Date(b.created))
+            console.log(postsDesc)
+        }
+        )
+    };
+    filterPost();
+
+
+    /**
+     * Filter and display posts based on the search input value.
+     */
+    // function displayFilteredPosts(filterMethod) {
+    //     const searchValue = searchInput.value.toLowerCase();
+    //     const filteredData = postList.filter((post) => post.title.toLowerCase().includes(searchValue));
+
+    //     postFeedContainer.innerHTML = "";
+
+    //     filteredData.forEach(({ id, title, body, media, author }) => {
+    //         const postCard = document.createElement("div");
+    //         postCard.classList.add("col-12", "col-md-6", "col-lg-4", "mb-4");
+    //         const imageUrl = media ? media : "https://via.placeholder.com/300";
+    //         postCard.id = id;
+
+    //         const cardDiv = createNewElement("div", { class: "card" })
+
+    //         const image = createNewElement("img", { src: imageUrl, alt: title, class: "card-img-top" });
+
+    //         const cardBodyDiv = createNewElement("div", { class: "card-body" });
+
+    //         const titleElement = createNewElement("h5", { class: "card-title", textContent: title });
+
+    //         const bodyElement = createNewElement("p", { class: "card-text", textContent: body });
+
+    //         const viewButton = createNewElement("button", {
+    //             class: "btn btn-primary view-post",
+    //             "data-post-id": id,
+    //             textContent: "View Post",
+    //         });
+
+    //         const editButton = createNewElement("button", {
+    //             class: "btn btn-primary edit-post",
+    //             "data-post-id": id,
+    //             textContent: "Edit Post",
+    //         });
+
+    //         const deleteButton = createNewElement("button", {
+    //             class: "btn btn-danger delete-post",
+    //             "data-post-id": id,
+    //             textContent: "Delete Post",
+    //         });
+
+    //         cardBodyDiv.appendChild(titleElement);
+    //         cardBodyDiv.appendChild(bodyElement);
+    //         cardBodyDiv.appendChild(viewButton);
+    //         if (author.name === loggedInName) {
+    //             cardBodyDiv.appendChild(editButton);
+    //             cardBodyDiv.appendChild(deleteButton);
+    //         }
+    //         cardDiv.appendChild(image);
+    //         cardDiv.appendChild(cardBodyDiv);
+
+    //         postCard.appendChild(cardDiv);
+
+    //         postFeedContainer.appendChild(postCard);
+    //     });
+
+    //     addViewPostListeners();
+    //     addEditPostListeners();
+    //     addDeletePostListeners();
+
+
+    //     async function filterPost() {
+    //         const dropdownMenu = document.getElementById("dropdownMenu");
+    //         const filterNewPost = document.getElementById("newestPost");
+    //         const filterOldPost = document.getElementById("oldestPost");
+    //         filterNewPost.addEventListener("click", (e) => {
+    //             console.log(filterNewPost.innerText);
+    //         }
+    //         )
+    //     };
+    //     filterPost();
 
 
     /**

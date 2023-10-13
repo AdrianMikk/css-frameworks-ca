@@ -11904,8 +11904,7 @@ header .nav-links:hover {
   transform: translateY(-5px);
 }
 
-#postModal,
-#editPostModal {
+#postModal, #editPostModal {
   display: none;
   position: fixed;
   top: 0;
@@ -11916,8 +11915,7 @@ header .nav-links:hover {
   z-index: 999;
   overflow: auto;
 }
-#postModal .modal-content,
-#editPostModal .modal-content {
+#postModal .modal-content, #editPostModal .modal-content {
   background-color: #fff;
   border-radius: 10px;
   max-width: 60%;
@@ -11928,32 +11926,58 @@ header .nav-links:hover {
   transform: translateY(-50%);
   text-align: center;
 }
-#postModal .close,
-#editPostModal .close {
+#postModal .close, #editPostModal .close {
   font-size: 24px;
   position: absolute;
   top: 10px;
   right: 10px;
   cursor: pointer;
 }
-#postModal h2, #postModal .h2,
-#editPostModal h2,
-#editPostModal .h2 {
+#postModal h2, #postModal .h2, #editPostModal h2, #editPostModal .h2 {
   font-size: 24px;
-  font-weight: bold;
 }
-#postModal img,
-#editPostModal img {
+#postModal h3, #postModal .h3, #editPostModal h3, #editPostModal .h3 {
+  font-size: 22px;
+}
+#postModal img, #editPostModal img {
   max-height: 300px;
   width: 100%;
   height: auto;
   object-fit: contain;
   margin: 10px 0;
 }
-#postModal p,
-#editPostModal p {
+#postModal p, #editPostModal p {
   font-size: 16px;
   margin: 10px 0;
+}
+#postModal #updatePostButton, #editPostModal #updatePostButton {
+  background: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+#postModal #updatePostButton:hover, #editPostModal #updatePostButton:hover {
+  background: #0056b3;
+}
+#postModal #editPostForm, #editPostModal #editPostForm {
+  display: flex;
+  flex-direction: column;
+}
+#postModal #editTitle, #editPostModal #editTitle {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+#postModal #editBody, #editPostModal #editBody {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 
 * {

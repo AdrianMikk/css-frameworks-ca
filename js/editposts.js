@@ -13,7 +13,7 @@ export function addEditPostListeners() {
     editPostButtons.forEach((button) => {
         button.addEventListener("click", (e) => {
             const postId = e.target.getAttribute("data-post-id");
-            console.log(postId);
+            // console.log(postId);
             openEditForm(postId);
         });
     });
@@ -37,6 +37,11 @@ function openEditForm(postId) {
         updatePost(postId, editTitle, editBody);
     });
 }
+
+const editCloseModalButton = document.getElementById("editCloseModalButton");
+editCloseModalButton.addEventListener("click", () => {
+    editPostModal.style.display = "none";
+});
 
 /**
  * Update a post with the provided data.
