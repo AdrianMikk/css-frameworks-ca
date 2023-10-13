@@ -44,7 +44,6 @@ export async function fetchAndDisplayPosts() {
             },
         };
         let postList = await apiFetch(fullPostURL + `?_author=true`, options);
-        console.log(postList);
         displayFilteredPosts(postList);
     } catch (error) {
         console.error(error);
@@ -115,24 +114,33 @@ export function displayFilteredPosts(data) {
 
 
 
-    // Filter posts by date
+    /**
+     * Filters posts by date based on user selection.
+     *
+     * This function attaches event listeners to two HTML elements, typically used for
+     * filtering posts by date: "Newest Posts" and "Oldest Posts" buttons. When a user clicks
+     * on one of these buttons, the function either fetches and displays posts or sorts the
+     * existing posts by their creation date and displays the filtered results.
+     */
     async function filterPost() {
         const dropdownMenu = document.getElementById("dropdownMenu");
         const filterNewPost = document.getElementById("newestPost");
         const filterOldPost = document.getElementById("oldestPost");
+
         filterNewPost.addEventListener("click", (e) => {
-            fetchAndDisplayPosts()
-        }
-        )
+            fetchAndDisplayPosts();
+        });
+
         filterOldPost.addEventListener("click", (e) => {
             const postsDesc = data.sort(
-                (a, b) => new Date(a.created) - new Date(b.created))
-            console.log(postsDesc)
+                (a, b) => new Date(a.created) - new Date(b.created)
+            );
             displayFilteredPosts(postsDesc);
-        }
-        )
-    };
+        });
+    }
+
     filterPost();
+
 
     /**
      * Add click event listeners to "View Post" buttons.
@@ -143,9 +151,7 @@ export function displayFilteredPosts(data) {
         viewPostButtons.forEach((button) => {
             button.addEventListener("click", (e) => {
                 const postId = e.target.getAttribute("data-post-id");
-                console.log(postId);
                 const post = data.find((post) => post.id === parseInt(postId));
-                console.log(post);
                 if (post) {
                     const modalTitle = document.getElementById("modalTitle");
                     const modalBody = document.getElementById("modalBody");

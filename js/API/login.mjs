@@ -17,14 +17,11 @@ function setToken(result) {
         localStorage.setItem("accessToken", result.accessToken);
         localStorage.setItem("email", result.email);
         localStorage.setItem("name", result.name);
-        console.log(result.accessToken);
         window.location.href = "/feed/index.html"
     } else {
         throw new Error("Access token not found in the response.")
     }
 };
-
-// registerUser(API_SOCIAL_REGISTER_URL, fetchOptions);
 
 const API_SOCIAL_LOGIN_PATH = "/social/auth/login";
 const API_SOCIAL_LOGIN_URL = `${API_BASE_URL}${API_SOCIAL_LOGIN_PATH}`;
@@ -41,9 +38,7 @@ export async function loginEvent(event) {
     event.preventDefault();
 
     const emailInput = document.querySelector("#floatingInput");
-    // console.log(emailInput);
     const passwordInput = document.querySelector("#floatingPassword");
-    // console.log(passwordInput);
 
     const loginOption = {
         method: "POST",
