@@ -1,6 +1,6 @@
 import { apiFetch } from "./API/apiFetch.mjs";
 import { createNewElement } from "./utils/createNewElement.mjs";
-import { createNewPost } from "./createPost.mjs";
+import { createNewPost } from "./components/createPost.mjs";
 import { addEditPostListeners } from "./components/editposts.js";
 import { addDeletePostListeners } from "./components/deletepost.js";
 import { search } from "./components/search.mjs";
