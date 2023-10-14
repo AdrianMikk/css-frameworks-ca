@@ -3,14 +3,16 @@ import { apiFetch } from "./apiFetch.mjs";
 const API_BASE_URL = "https://api.noroff.dev/api/v1";
 
 const profileLink = document.getElementById("navProfile");
-profileLink.addEventListener("click", () => {
-    const token = localStorage.getItem("accessToken");
-    if (token) {
-        window.location.href = `/profile/index.html`;
-    } else {
-        alert("You need to be logged in to view profile!");
+const token = localStorage.getItem("accessToken");
+
+profileLink.addEventListener("click", (event) => {
+    if (!token) {
+        event.preventDefault();
+        alert("You need to be logged in to view your profile.");
     }
 });
+
+
 
 function setToken(result) {
     if (result.accessToken) {
@@ -19,6 +21,7 @@ function setToken(result) {
         localStorage.setItem("name", result.name);
         window.location.href = "/feed/index.html"
     } else {
+        alert("Enter correct email and password")
         throw new Error("Access token not found in the response.")
     }
 };

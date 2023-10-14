@@ -12,21 +12,33 @@ const API_SOCIAL_REGISTER_URL = `${API_BASE_URL}${API_SOCIAL_REGISTER_PATH}`;
 export async function registerEvent(event) {
     event.preventDefault();
 
-    const nameRegisterInput = document.querySelector("#floatingRegisterNameInput")
-    const emailRegisterInput = document.querySelector("#floatingRegisterEmailInput")
-    const passwordRegisterInput = document.querySelector("#floatingRegisterPasswordInput")
+    const nameRegisterInput = document.querySelector("#floatingRegisterNameInput");
+    const emailRegisterInput = document.querySelector("#floatingRegisterEmailInput");
+    const passwordRegisterInput = document.querySelector("#floatingRegisterPasswordInput");
+
+    const registerData = {
+        name: nameRegisterInput.value,
+        email: emailRegisterInput.value,
+        password: passwordRegisterInput.value,
+    };
 
     const registerOption = {
         method: "POST",
-        body: JSON.stringify({
-            "name": nameRegisterInput.value,
-            "email": emailRegisterInput.value,
-            "password": passwordRegisterInput.value,
-        }),
+        body: JSON.stringify(registerData),
         headers: {
             "Content-Type": "application/json",
         },
     };
-    apiFetch(API_SOCIAL_REGISTER_URL, registerOption);
-}
+
+    try {
+        const response = await apiFetch(API_SOCIAL_REGISTER_URL, registerOption);
+
+        if (response.status === 200) {
+        } else {
+            console.error("Registration failed:", response.statusText);
+        }
+    } catch (error) {
+        console.error("An error occurred:", error);
+    }
+};
 
