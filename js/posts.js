@@ -1,9 +1,9 @@
 import { apiFetch } from "./API/apiFetch.mjs";
 import { createNewElement } from "./utils/createNewElement.mjs";
 import { createNewPost } from "./createPost.mjs";
-import { addEditPostListeners } from "./editposts.js";
-import { addDeletePostListeners } from "./deletePost.js";
-import { search } from "./search.mjs";
+import { addEditPostListeners } from "./components/editposts.js";
+import { addDeletePostListeners } from "./components/deletepost.js";
+import { search } from "./components/search.mjs";
 
 
 const fullPostURL = "https://api.noroff.dev/api/v1/social/posts";

@@ -8,7 +8,7 @@ const userId = localStorage.getItem("name");
 async function fetchProfile() {
     if (!accessToken) {
         location.href = "/index.html";
-        return; // Add a return statement to exit the function
+        return;
     }
     try {
         const options = {
@@ -17,7 +17,6 @@ async function fetchProfile() {
             },
         };
         const postList = await apiFetch(API_BASE_URL + `/social/profiles/${userId}`, options);
-        console.log(postList);
         displayUser(postList)
     } catch (error) {
         console.error(error);

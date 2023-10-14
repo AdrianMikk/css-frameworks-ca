@@ -1,5 +1,5 @@
-import { apiFetch } from './API/apiFetch.mjs';
-import { displayFilteredPosts } from './posts.js';
+import { apiFetch } from '../API/apiFetch.mjs';
+import { displayFilteredPosts } from '../posts.js';
 
 const accessToken = localStorage.getItem("accessToken");
 const searchInput = document.getElementById("search");
