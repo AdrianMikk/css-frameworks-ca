@@ -32,10 +32,10 @@ export async function registerEvent(event) {
 
     try {
         const response = await apiFetch(API_SOCIAL_REGISTER_URL, registerOption);
-
-        if (response.status === 200) {
+        console.log(response)
+        if (response) {
         } else {
-            console.error("Registration failed:", response.statusText);
+            console.error("Registration failed:", response);
         }
     } catch (error) {
         console.error("An error occurred:", error);

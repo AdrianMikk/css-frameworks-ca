@@ -7,3 +7,12 @@ const API_BASE_URL = "https://api.noroff.dev";
 
 loginRegisterButton.addEventListener("click", loginEvent);
 registerButton.addEventListener("click", registerEvent);
+
+function checkIfLoggedIn() {
+    const userId = localStorage.getItem("name")
+    const token = localStorage.getItem("accessToken")
+
+    if (userId && token)
+        window.location.replace(`/profile/index.html?=${userId}`)
+}
+checkIfLoggedIn();

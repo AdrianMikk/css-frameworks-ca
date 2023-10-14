@@ -18,10 +18,7 @@ export async function createNewPost(options) {
     try {
         const response = await apiFetch(fullPostURL, options);
 
-        console.log(response)
-
         if (response && response.id) {
-            // alert("Post created successfully!");
             fetchAndDisplayPosts();
             createPostForm.reset();
         } else {
