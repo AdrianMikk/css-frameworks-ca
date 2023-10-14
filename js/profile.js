@@ -5,6 +5,19 @@ const accessToken = localStorage.getItem("accessToken");
 const name = "";
 const userId = localStorage.getItem("name");
 
+/**
+ * Fetches and displays a user profile if authenticated.
+ *
+ * If the user is authenticated this function fetches the user's
+ * profile from an API and displays it. If not authenticated, it redirects to the homepage.
+ *
+ * @async
+ * @function fetchProfile
+ *
+ * @throws {Error} If there is an issue with the API request or response.
+ *
+ * @returns {Promise<void>} A Promise that resolves when the user profile is fetched and displayed.
+ */
 async function fetchProfile() {
     if (!accessToken) {
         location.href = "/index.html";
@@ -26,6 +39,13 @@ async function fetchProfile() {
 
 fetchProfile();
 
+/**
+ * Displays a user's profile information in the UI.
+ *
+ * @function displayUser
+ *
+ * @param {Object} user - The user profile data to be displayed.
+ */
 function displayUser(user) {
     const userName = document.getElementById("userName");
     const userAvatar = document.getElementById("userAvatar");
@@ -44,6 +64,11 @@ function displayUser(user) {
     followingCount.innerText = `${user._count.following}`
 }
 
+/**
+ * Logs out the user by clearing local storage on button click.
+ *
+ * @function logOutUser
+ */
 function logOutUser() {
     const logOutBtn = document.getElementById("logOut")
     logOutBtn.addEventListener("click", () => {

@@ -33,6 +33,19 @@ const editPostBodyInput = document.getElementById("editPostBody");
 const postModal = document.getElementById("postModal");
 const editPostModal = document.getElementById("editPostModal");
 
+/**
+ * Fetches and displays posts if a user is authenticated.
+ *
+ * If the user is authenticated this function fetches posts
+ * from an API and displays them. If not authenticated, it redirects to the homepage.
+ *
+ * @async
+ * @function fetchAndDisplayPosts
+ *
+ * @throws {Error} If there is an issue with the API request or response.
+ *
+ * @returns {Promise<void>} A Promise that resolves when the posts are fetched and displayed.
+ */
 export async function fetchAndDisplayPosts() {
     if (!accessToken) {
         location.href = "/index.html";
