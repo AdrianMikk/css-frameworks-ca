@@ -3,6 +3,7 @@ import { apiFetch } from "./apiFetch.mjs";
 const API_BASE_URL = "https://api.noroff.dev/api/v1";
 
 const profileLink = document.getElementById("navProfile");
+const userName = document.getElementById("userName");
 const token = localStorage.getItem("accessToken");
 
 profileLink.addEventListener("click", (event) => {
