@@ -28,22 +28,37 @@ export async function createNewPost(options) {
         console.error(error);
         alert("Error creating the post.");
     }
-    const options = {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${accessToken}`,
-        },
-        body: JSON.stringify(newPostData),
-    };
 }
 
-const title = newPostTitleInput.value;
-const body = newPostBodyInput.value;
-const media = newPostImageInput.value;
+const createPostFormSubmit = (e) => {
+    e.preventDefault();
 
-const newPostData = {
-    title,
-    body,
-    media,
+    const title = newPostTitleInput.value;
+    const body = newPostBodyInput.value;
+    const media = newPostImageInput.value;
+
+    const newPostData = {
+        title,
+        body,
+        media,
+    };
+
+    fetch(fullPostURL, options)
+        .then((response) => response.json())
+        .then((data) => {
+            if (data.id) {
+                postModal.style.display = "none";
+                createPostForm.removeEventListener("submit", createPostFormSubmit);
+                const event = new Event('refreshPosts');
+                document.dispatchEvent(event);
+            } else {
+                alert("Failed to create a new post.");
+            }
+        })
+        .catch((error) => {
+            console.error(error);
+            alert("Failed to create a new post.");
+        });
 };
+
+createPostForm.addEventListener("submit", createPostFormSubmit);
