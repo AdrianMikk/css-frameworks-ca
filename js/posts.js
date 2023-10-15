@@ -59,7 +59,6 @@ export async function fetchAndDisplayPosts() {
         let postList = await apiFetch(fullPostURL + `?_author=true`, options);
         displayFilteredPosts(postList);
     } catch (error) {
-        console.error(error);
         alert("Failed to fetch posts.");
     }
 }
