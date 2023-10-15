@@ -192,6 +192,26 @@ export function displayFilteredPosts(data) {
         console.log(createPostForm);
         e.preventDefault();
 
+        const title = newPostTitleInput.value;
+        const body = newPostBodyInput.value;
+        const media = newPostImageInput.value;
+
+        const newPostData = {
+            title,
+            body,
+            media,
+        };
+
+        const options = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${accessToken}`,
+            },
+            body: JSON.stringify(newPostData),
+        };
+
+        createNewPost(options);
     })
 };
 
