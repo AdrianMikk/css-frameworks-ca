@@ -28,6 +28,14 @@ export async function createNewPost(options) {
         console.error(error);
         alert("Error creating the post.");
     }
+    const options = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify(newPostData),
+    };
 }
 
 const title = newPostTitleInput.value;
@@ -38,13 +46,4 @@ const newPostData = {
     title,
     body,
     media,
-};
-
-const options = {
-    method: "POST",
-    headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`,
-    },
-    body: JSON.stringify(newPostData),
 };
