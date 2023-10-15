@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Login & Register page of my social media site ConnectVerse">
     <link rel="stylesheet" href="/dist/css/index.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,7 +12,8 @@
     <script type="module" src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
         crossorigin="anonymous"></script>
-    <title>ConnectVerse | Login</title>
+    <script type="module" defer src="/js/index.js"></script>
+    <title>Login | ConnectVerse</title>
 </head>
 
 <body>
@@ -29,14 +31,14 @@
 
                 <div class="collapse navbar-collapse order-lg-1 justify-content-between" id="navbarColor01">
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active ml-3">
-                            <a class="nav-link d-flex" href="/index.html">Login</a>
+                        <li class="nav-item ml-3">
+                            <a class="nav-link d-flex active" href="/index.html">Login</a>
                         </li>
                         <li class="nav-item ml-3">
-                            <a class="nav-link d-flex" href="../feed/index.html">Feed</a>
+                            <a class="nav-link d-flex" href="/feed">Feed</a>
                         </li>
                         <li class="nav-item ml-3">
-                            <a class="nav-link d-flex" href="../profile/index.html">Profile</a>
+                            <a class="nav-link d-flex" id="navProfile" href="/profile">Profile</a>
                         </li>
                     </ul>
                     <form class="form d-flex justify-content-between my-lg-0">
@@ -61,11 +63,11 @@
                 <h2 class="fs-1 mb-3">Hello Again</h2>
                 <p>Welcome back!</p>
             </div>
-            <form action="./profile/index.html">
-                <h1 class="h3 mb-3 fw-normal text-center">Login</h1>
+            <form id="login-form">
+                <h3 class="h3 mb-3 fw-normal text-center">Login / Register</h3>
 
                 <div class="form-floating bg m-2">
-                    <input type="email" class="form-control bg-light" required id="floatingInput"
+                    <input type="email" class="login-email form-control bg-light" required id="floatingInput"
                         placeholder="name@example.com">
                     <label for="floatingInput">Email address</label>
                 </div>
@@ -81,8 +83,48 @@
                         Remember me
                     </label>
                 </div>
-                <button class="btn btn-success w-100 py-2" type="submit">Login / Register</button>
+                <button class="btn btn-success w-100 py-2" type="submit" id="login-register-btn">Login</button>
             </form>
+            <a type="button" class="register-modal btn-primary m-2" data-bs-toggle="modal"
+                data-bs-target="#exampleModal">
+                Don't have an account? Register here.
+            </a>
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title fs-5" id="exampleModalLabel">ConnectVerse Register</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form id="registration-form">
+                                <h5 class="h3 mb-3 fw-normal text-center">Register</h5>
+                                <div class="form-floating bg m-2">
+                                    <input type="name" class="register-name form-control bg-light"
+                                        id="floatingRegisterNameInput" placeholder="name@example.com">
+                                    <label for="floatingInput">Full Name</label>
+                                </div>
+                                <div class="form-floating bg m-2">
+                                    <input type="email" class="register-email form-control bg-light" required
+                                        id="floatingRegisterEmailInput" placeholder="name@example.com">
+                                    <label for="floatingInput">Email address</label>
+                                </div>
+                                <div class="form-floating m-2">
+                                    <input type="password" class="form-control bg-light" required minlength="8"
+                                        id="floatingRegisterPasswordInput" placeholder="Password">
+                                    <label for="floatingPassword">Password</label>
+                                </div>
+                                <button class="btn btn-success w-100 py-2" type="submit" id="register-btn">
+                                    Register</button>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
     </main>
 
 

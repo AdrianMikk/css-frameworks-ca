@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Feed of my social media site ConnectVerse">
     <link rel="stylesheet" href="/dist/css/index.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,7 +12,8 @@
     <script type="module" src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
         crossorigin="anonymous"></script>
-    <title>ConnectVerse | Feed</title>
+    <script type="module" defer src="/js/posts.js"></script>
+    <title>Feed | ConnectVerse</title>
 </head>
 
 <body>
@@ -19,7 +21,7 @@
     <header>
         <div class="bs-component">
             <nav class="navbar navbar-expand-lg bg-primary d-flex p-2">
-                <a class="navbar-brand logo fs-2" href="/index.html">
+                <a class="navbar-brand logo fs-2" href="/feed/index.html">
                     ConnectVerse
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
@@ -30,18 +32,18 @@
                 <div class="collapse navbar-collapse order-lg-1 justify-content-between" id="navbarColor01">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active ml-3">
-                            <a class="nav-link d-flex" href="/index.html">Login</a>
+                            <a class="nav-link d-flex" href="/index.html">Sign Out</a>
                         </li>
                         <li class="nav-item ml-3">
-                            <a class="nav-link d-flex" href="../feed/index.html">Feed</a>
+                            <a class="nav-link d-flex active" href="/feed">Feed</a>
                         </li>
                         <li class="nav-item ml-3">
-                            <a class="nav-link d-flex" href="../profile/index.html">Profile</a>
+                            <a class="nav-link d-flex" id="navProfile" href="/profile">Profile</a>
                         </li>
                     </ul>
                     <form class="form d-flex justify-content-between my-lg-0">
                         <label for="search" class="visually-hidden">Search</label>
-                        <input id="search" class="form-control mr-sm-2" type="search" placeholder="Search">
+                        <input id="search" class="form-control mr-sm-2" type="search" placeholder="Search by Post">
                         <button class="btn btn-light m-2 my-sm-0" type="submit">
                             Search
                         </button>
@@ -60,85 +62,74 @@
 
             <div class="container mt-5 text-center">
                 <h2>Create a New Post</h2>
-                <form>
+                <form id="createPostForm">
                     <div class="form-group">
-                        <label for="title">Title:</label>
-                        <input type="text" class="form-control" id="title" name="title" required>
+                        <label for="newPostTitle">Title:</label>
+                        <input type="text" class="form-control" id="newPostTitle" name="title" required>
                     </div>
                     <div class="form-group">
-                        <label for="content">Content:</label>
-                        <textarea class="form-control" id="content" name="content" rows="5" required></textarea>
+                        <label for="newPostBody">Content:</label>
+                        <textarea class="form-control" id="newPostBody" name="content" rows="5" required></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary m-2">Create Post</button>
+                    <div class="form-group">
+                        <label for="newPostImageInput">Image Address (URL):</label>
+                        <input type="text" class="form-control" id="newPostImageInput" name="image_url">
+                    </div>
+                    <button type="submit" id="createPostBtn" class="btn btn-primary m-2">Create Post</button>
                 </form>
             </div>
+
             <div>
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdownMenu" role="button"
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Sort by
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Newest</a>
-                            <a class="dropdown-item" href="#">Oldest</a>
-                            <a class="dropdown-item" href="#">Most Popular</a>
+                            <a class="dropdown-item" id="newestPost" href="#">Newest</a>
+                            <a class="dropdown-item" id="oldestPost" href="#">Oldest</a>
                         </div>
                     </li>
                 </ul>
+            </div>
+
+        </div>
+
+        <div id="postModal" class="modal-dialog">
+            <div class="modal-content">
+                <span class="post-id" id="postId"></span>
+                <span id="closeModalButton" class="close">&times;</span>
+                <h2 id="modalTitle"></h2>
+                <img id="modalImage">
+                <p id="modalBody"></p>
+            </div>
+        </div>
+        <div id="editPostModal" class="modal-dialog">
+            <div class="modal-content">
+                <span class="post-id" id="editPostId"></span>
+                <span id="editCloseModalButton" class="close">&times;</span>
+                <h2 id="modalTitle">Title:</h2>
+                <form action="" id="editPostForm">
+                    <input type="edit-title" id="editTitle">
+                    <h3>Content:
+                        <textarea name="edit-body" id="editBody" cols="30" rows="5"></textarea>
+                    </h3>
+                    <button id="updatePostButton">Update Post</button>
+                </form>
             </div>
         </div>
 
         <div class="container mt-4">
             <div class="row">
-                <div class="col-md-6 col-lg-3 mb-3">
-                    <div class="card">
-                        <img src="/images/johanne-pold-jacobsen-ohoOQxgvB0w-unsplash (1).jpg"
-                            alt="Refreshing mojito cocktail with lime, mint leaves, and ice in a glass."
-                            class="card-img-top img-fluid">
-                        <div class="card-body">
-                            <h5 class="card-title text-center">Mojito</h5>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6 col-lg-3 mb-3">
-                    <div class="card">
-                        <img src="/images/andrey-grodz-gNDXG7EEjXM-unsplash (1).jpg"
-                            alt="Classic whiskey sour cocktail garnished with a lemon peel."
-                            class="card-img-top img-fluid">
-                        <div class="card-body">
-                            <h5 class="card-title text-center">Whiskey Sour</h5>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6 col-lg-3 mb-3">
-                    <div class="card">
-                        <img src="/images/stanislav-ivanitskiy-VIYPN3KykEU-unsplash 1-min.jpg"
-                            alt="Elegant martini cocktail with a perfect mix of gin or vodka, vermouth, and olive garnish."
-                            class="card-img-top img-fluid">
-                        <div class="card-body">
-                            <h5 class="card-title text-center">Martini</h5>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6 col-lg-3 mb-3">
-                    <div class="card">
-                        <img src="/images/jessica-kantak-bailey-woLpKjQisW8-unsplash (1) 1-min.jpg"
-                            alt="Timeless Old Fashioned cocktail with bourbon, sugar, bitters, and an orange twist garnish."
-                            class="card-img-top img-fluid">
-                        <div class="card-body">
-                            <h5 class="card-title text-center">Old Fashioned</h5>
-                        </div>
-                    </div>
+                <div class="col-md-12">
                 </div>
             </div>
-        </div>
-
+            <div class="row mt-3" id="postFeed">
+            </div>
         </div>
     </main>
+
     <footer>
         <p class="text-center mt-5">
             &copy Adrian Mikkelsen Johannessen | All rights reserved

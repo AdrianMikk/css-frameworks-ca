@@ -1,9 +1,10 @@
 @import "./partials/variables";
+@import "../../node_modules/bootstrap/scss/bootstrap";
 @import "../scss/partials/header";
 @import "../scss/partials/login";
 @import "../scss/partials/feed";
 @import "../scss/partials/profile";
-@import "../../node_modules/bootstrap/scss/bootstrap";
+@import "../scss/partials/postmodal.scss";
 
 * {
     font-family: 'Poppins', sans-serif;
@@ -12,3 +13,4 @@
 h1 {
     font-family: 'Lobster';
 }
+

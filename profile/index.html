@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Personal profile of my social media site ConnectVerse">
     <link rel="stylesheet" href="/dist/css/index.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,14 +12,15 @@
     <script type="module" src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
         crossorigin="anonymous"></script>
-    <title>ConnectVerse | Profile</title>
+    <script src="/js/profile.js" type="module"></script>
+    <title>Profile | ConnectVerse</title>
 </head>
 
 <body>
     <header>
         <div class="bs-component">
             <nav class="navbar navbar-expand-lg bg-primary d-flex p-2">
-                <a class="navbar-brand logo fs-2" href="/index.html">
+                <a class="navbar-brand logo fs-2" href="/feed/index.html">
                     ConnectVerse
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
@@ -29,19 +31,19 @@
                 <div class="collapse navbar-collapse order-lg-1 justify-content-between" id="navbarColor01">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active ml-3">
-                            <a class="nav-link d-flex" href="/index.html">Login</a>
+                            <a id="logOut" class="nav-link d-flex" href="/index.html">Sign Out</a>
                         </li>
                         <li class="nav-item ml-3">
-                            <a class="nav-link d-flex" href="../feed/index.html">Feed</a>
+                            <a class="nav-link d-flex" href="/feed">Feed</a>
                         </li>
                         <li class="nav-item ml-3">
-                            <a class="nav-link d-flex" href="../profile/index.html">Profile</a>
+                            <a class="nav-link d-flex" id="navProfile" href="/profile">Profile</a>
                         </li>
                     </ul>
-                    <form class="form d-flex justify-content-between my-lg-0">
+                    <form id="searchForm" class="form d-flex justify-content-between my-lg-0">
                         <label for="search" class="visually-hidden">Search</label>
-                        <input id="search" class="form-control mr-sm-2" type="search" placeholder="Search">
-                        <button class="btn btn-light m-2 my-sm-0" type="submit">
+                        <input id="search" class="form-control mr-sm-2" type="search" placeholder="Search by Post">
+                        <button id="searchButton" class="btn btn-light m-2 my-sm-0" type="submit">
                             Search
                         </button>
                     </form>
@@ -53,13 +55,13 @@
     <main>
         <div class="row text-center border-top border-secondary p-1">
             <h1 class="mt-5 pt-2">ConnectVerse</h1>
-            <div class="container">
-                <div class="d-flex p-4 justify-content-center">
-                    <img src="/images/elmo.jpg" alt="Picture of Elmo sitting on a rock">
+            <div class="container" id="postsContainer">
+                <div class="d-flex p-4 justify-content-center col-2 m-auto">
+                    <img id="userAvatar" class="img-fluid" alt="Avatar Silhouette">
                 </div>
                 <div class="d-flex justify-content-center p-4">
                     <div>
-                        <h2>Elmo Elmosen</h2>
+                        <h2 id="userName">Loading</h2>
                     </div>
                     <div class="d-flex flex-column">
                         <button class="btn btn-primary mx-5">Follow</button>
@@ -68,101 +70,24 @@
                 <div class="d-flex">
                     <div class="col-4">
                         <p>Posts</p>
-                        <p>167</p>
+                        <p id="postCount">167</p>
                     </div>
                     <div class="col-4">
                         <p>
                             Followers
                         </p>
-                        <p>473</p>
+                        <p id="followerCount">473</p>
                     </div>
                     <div class="col-4">
                         <p>
                             Following
                         </p>
-                        <p>
+                        <p id="followingCount">
                             645
                         </p>
                     </div>
                 </div>
             </div>
-            <div class="container mb-5">
-                <div class="row">
-                    <div class="col-6 col-sm-6 col-md-4 col-lg-3">
-                        <div class="card mb-4">
-                            <h3 class="card-header">Mojito</h3>
-                            <img src="/images/johanne-pold-jacobsen-ohoOQxgvB0w-unsplash (1).jpg"
-                                alt="Refreshing mojito cocktail with lime, mint leaves, and ice in a glass."
-                                class="card-img-top">
-                            <div class="card-body">
-                                <p class="card-text">5 mint leaves, 2 ounces white rum 1 ounce fresh lime juice ½ ounce
-                                    simple syrup</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-6 col-sm-6 col-md-4 col-lg-3">
-                        <div class="card mb-4">
-                            <h3 class="card-header">Whiskey Sour</h3>
-                            <img src="/images/andrey-grodz-gNDXG7EEjXM-unsplash (1).jpg"
-                                alt="Classic whiskey sour cocktail garnished with a lemon peel." class="card-img-top">
-                            <div class="card-body">
-                                <p class="card-text">2 ounces bourbon 3/4 ounce lemon juice, freshly squeezed 1/2 ounce
-                                    simple syrup 1/2 ounce egg white</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-6 col-sm-6 col-md-4 col-lg-3">
-                        <div class="card mb-4">
-                            <h3 class="card-header">Martini</h3>
-                            <img src="/images/stanislav-ivanitskiy-VIYPN3KykEU-unsplash 1-min.jpg"
-                                alt="Elegant martini cocktail with a perfect mix of gin or vodka, vermouth, and olive garnish."
-                                class="card-img-top">
-                            <div class="card-body">
-                                <p class="card-text">60ml gin or vodka
-                                    1 tbsp dry vermouth
-                                    olive or lemon peel, to garnish</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-6 col-sm-6 col-md-4 col-lg-3">
-                        <div class="card mb-4">
-                            <h3 class="card-header">Old Fashioned</h3>
-                            <img src="/images/jessica-kantak-bailey-woLpKjQisW8-unsplash (1) 1-min.jpg"
-                                alt="Timeless Old Fashioned cocktail with bourbon, sugar, bitters, and an orange twist garnish."
-                                class="card-img-top">
-                            <div class="card-body">
-                                <p class="card-text">1 teaspoon sugar 3 dashes Angostura bitters 1 teaspoon water 2
-                                    ounces bourbon or rye whiskey.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-6 col-sm-6 col-md-4 col-lg-3">
-                        <div class="card mb-4">
-                            <h3 class="card-header">Mojito</h3>
-                            <img src="/images/johanne-pold-jacobsen-ohoOQxgvB0w-unsplash (1).jpg"
-                                alt="Refreshing mojito cocktail with lime, mint leaves, and ice in a glass."
-                                class="card-img-top">
-                            <div class="card-body">
-                                <p class="card-text">5 mint leaves, 2 ounces white rum 1 ounce fresh lime juice ½ ounce
-                                    simple syrup</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-6 col-sm-6 col-md-4 col-lg-3">
-                        <div class="card mb-4">
-                            <h3 class="card-header">Whiskey Sour</h3>
-                            <img src="/images/andrey-grodz-gNDXG7EEjXM-unsplash (1).jpg"
-                                alt="Classic whiskey sour cocktail garnished with a lemon peel." class="card-img-top">
-                            <div class="card-body">
-                                <p class="card-text">2 ounces bourbon 3/4 ounce lemon juice, freshly squeezed 1/2 ounce
-                                    simple syrup 1/2 ounce egg white</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
     </main>
     <footer>
         <p class="text-center mt-5">
