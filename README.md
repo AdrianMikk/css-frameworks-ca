@@ -23,7 +23,6 @@ I made a social media app with a login page, a feed, and a profile.
 
 * [Website](https://neon-kulfi-f933b1.netlify.app/)
 
-GITHUB: 
 
 # Contact
 
