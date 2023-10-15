@@ -2,6 +2,8 @@
 
 # ConnectVerse Social Media App
 
+![ConnectVerse JS2](https://github.com/Noroff-FEU-Assignments/project-exam-1-AdrianMikk/assets/113434165/dce76ae5-076e-4115-9917-9a101b4002c3)
+
 # Description
 
 I made a social media app with a login page, a feed, and a profile.
@@ -15,13 +17,13 @@ I made a social media app with a login page, a feed, and a profile.
 
 ## Getting Started
 
-\*[Trello: https://trello.com/invite/b/hjWVhh2G/ATTI8d895d150c131ae7c886c6142f47667d340843D8/javascript-2]
+* [Trello Board](https://trello.com/invite/b/hjWVhh2G/ATTI8d895d150c131ae7c886c6142f47667d340843D8/javascript-2)
 
 ### Executing Program
 
-\*Netlify:[https://neon-kulfi-f933b1.netlify.app/]
+* [Website](https://neon-kulfi-f933b1.netlify.app/)
 
-\*[Github:]
+GITHUB: 
 
 # Contact
 
