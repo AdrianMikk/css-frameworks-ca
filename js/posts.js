@@ -188,7 +188,8 @@ export function displayFilteredPosts(data) {
     });
 
 
-    createPostForm.addEventListener("submit", async function (e) {
+    createPostForm.addEventListener("submit", (e) => {
+        console.log(createPostForm);
         e.preventDefault();
 
         const title = newPostTitleInput.value;
