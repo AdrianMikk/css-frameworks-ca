@@ -27,6 +27,8 @@ export async function createNewPost(options) {
     } catch (error) {
         console.error(error);
         alert("Error creating the post.");
+    } finally {
+        document.getElementById("createPostBtn").disabled = false;
     }
 }
 
