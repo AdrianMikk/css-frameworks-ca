@@ -30,35 +30,21 @@ export async function createNewPost(options) {
     }
 }
 
-const createPostFormSubmit = (e) => {
-    e.preventDefault();
+const title = newPostTitleInput.value;
+const body = newPostBodyInput.value;
+const media = newPostImageInput.value;
 
-    const title = newPostTitleInput.value;
-    const body = newPostBodyInput.value;
-    const media = newPostImageInput.value;
-
-    const newPostData = {
-        title,
-        body,
-        media,
-    };
-
-    fetch(fullPostURL, options)
-        .then((response) => response.json())
-        .then((data) => {
-            if (data.id) {
-                postModal.style.display = "none";
-                createPostForm.removeEventListener("submit", createPostFormSubmit);
-                const event = new Event('refreshPosts');
-                document.dispatchEvent(event);
-            } else {
-                alert("Failed to create a new post.");
-            }
-        })
-        .catch((error) => {
-            console.error(error);
-            alert("Failed to create a new post.");
-        });
+const newPostData = {
+    title,
+    body,
+    media,
 };
 
-createPostForm.addEventListener("submit", createPostFormSubmit);
+const options = {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+    },
+    body: JSON.stringify(newPostData),
+};
