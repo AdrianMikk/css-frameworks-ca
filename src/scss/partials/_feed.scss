@@ -1,0 +1,12 @@
+.card-container {
+    
+    .feed-card {
+        transition: transform 0.3s ease-in-out;
+
+        &:hover {
+            transform: translateY(-5px);
+        }
+    }
+}
+
+

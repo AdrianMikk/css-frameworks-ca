@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Personal profile of my social media site ConnectVerse">
+    <link rel="stylesheet" href="/dist/css/index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Poppins&display=swap" rel="stylesheet">
+    <script type="module" src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+    <script src="/js/profile.js" type="module"></script>
+    <title>Profile | ConnectVerse</title>
+</head>
+
+<body>
+    <header>
+        <div class="bs-component">
+            <nav class="navbar navbar-expand-lg bg-primary d-flex p-2">
+                <a class="navbar-brand logo fs-2" href="/feed/index.html">
+                    ConnectVerse
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
+                    aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse order-lg-1 justify-content-between" id="navbarColor01">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active ml-3">
+                            <a id="logOut" class="nav-link d-flex" href="/index.html">Sign Out</a>
+                        </li>
+                        <li class="nav-item ml-3">
+                            <a class="nav-link d-flex" href="/feed">Feed</a>
+                        </li>
+                        <li class="nav-item ml-3">
+                            <a class="nav-link d-flex" id="navProfile" href="/profile">Profile</a>
+                        </li>
+                    </ul>
+                    <form id="searchForm" class="form d-flex justify-content-between my-lg-0">
+                        <label for="search" class="visually-hidden">Search</label>
+                        <input id="search" class="form-control mr-sm-2" type="search" placeholder="Search by Post">
+                        <button id="searchButton" class="btn btn-light m-2 my-sm-0" type="submit">
+                            Search
+                        </button>
+                    </form>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="row text-center border-top border-secondary p-1">
+            <h1 class="mt-5 pt-2">ConnectVerse</h1>
+            <div class="container" id="postsContainer">
+                <div class="d-flex p-4 justify-content-center col-2 m-auto">
+                    <img id="userAvatar" class="img-fluid" alt="Avatar Silhouette">
+                </div>
+                <div class="d-flex justify-content-center p-4">
+                    <div>
+                        <h2 id="userName">Loading</h2>
+                    </div>
+                    <div class="d-flex flex-column">
+                        <button class="btn btn-primary mx-5">Follow</button>
+                    </div>
+                </div>
+                <div class="d-flex">
+                    <div class="col-4">
+                        <p>Posts</p>
+                        <p id="postCount">167</p>
+                    </div>
+                    <div class="col-4">
+                        <p>
+                            Followers
+                        </p>
+                        <p id="followerCount">473</p>
+                    </div>
+                    <div class="col-4">
+                        <p>
+                            Following
+                        </p>
+                        <p id="followingCount">
+                            645
+                        </p>
+                    </div>
+                </div>
+            </div>
+    </main>
+    <footer>
+        <p class="text-center mt-5">
+            &copy Adrian Mikkelsen Johannessen | All rights reserved
+        </p>
+    </footer>
+</body>
+
+</html>

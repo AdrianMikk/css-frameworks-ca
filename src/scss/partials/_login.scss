@@ -1,0 +1,14 @@
+.login-container {
+    border: 1px solid $primary;
+    background-color: $bg-color;
+
+    form {
+
+            color: $text-color;
+            cursor: pointer;
+
+            &:hover {
+                background-color: darken($success, 10%);
+        }
+    }
+}

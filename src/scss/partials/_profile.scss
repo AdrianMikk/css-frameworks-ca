@@ -1,0 +1,11 @@
+.card-container {
+
+    .card {
+        border: 1px solid $light;
+        transition: transform 0.3s ease-in-out;
+
+        &:hover {
+            transform: translateY(-5px);
+        }
+    }
+}

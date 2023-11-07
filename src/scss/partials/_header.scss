@@ -1,0 +1,14 @@
+header {
+
+        .logo {
+            font-family: 'Lobster', cursive;
+        }
+
+        .nav-links {
+            list-style: none;
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+    }
+}
